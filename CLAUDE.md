@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Objective
 
-This repository generates GitHub Copilot agents from source materials. Agents are defined in `agents.md` files with YAML frontmatter and custom instructions that define the agent's persona, tech stack, project structure, workflows, commands, and boundaries.
+This repository generates GitHub Copilot agents from source materials. Agents are defined in `.agent.md` files with YAML frontmatter and custom instructions that define the agent's persona, tech stack, project structure, workflows, commands, and boundaries.
 
 ### Workflow
 
@@ -14,30 +14,73 @@ This repository generates GitHub Copilot agents from source materials. Agents ar
 
 ### Key Concepts from Source Material
 
-Effective agents.md files are **specific**, not vague. The best agents have:
+Effective agent.md files are **specific**, not vague. The best agents have:
 - **Clear persona**: "QA software engineer who writes tests" not "helpful assistant"
 - **Executable commands**: Put commands early with flags (`pytest -v`, `npm run build`)
 - **Code examples**: Show good output style, don't just describe it
 - **Clear boundaries**: What to always do, ask first, never do
 - **Specific stack**: "React 18, TypeScript, Vite, Tailwind" not "React project"
 
-### Six Core Areas for Every Agent
+### Agent File Structure
 
-1. **Commands** - Executable commands with flags/options
-2. **Testing** - How to run and validate tests
-3. **Project structure** - Where files live and what they do
-4. **Code style** - Examples showing good output
-5. **Git workflow** - Commit patterns, branch strategies
-6. **Boundaries** - Always do / Ask first / Never do
+GitHub Copilot agents use the `.agent.md` file extension with YAML frontmatter:
+
+```yaml
+---
+name: agent-name              # Optional: defaults to filename
+description: Required description of agent's purpose
+target: vscode | github-copilot  # Optional: defaults to both
+tools: ["read", "edit", "search"]  # Optional: omit for all tools
+disable-model-invocation: false   # Optional: manual selection only
+---
+```
+
+#### YAML Frontmatter Properties
+
+| Property | Type | Required | Purpose |
+|----------|------|----------|---------|
+| `name` | string | No | Display name (defaults to filename) |
+| `description` | string | **Yes** | Agent's purpose and capabilities |
+| `target` | string | No | `vscode` or `github-copilot` (both if omitted) |
+| `tools` | list | No | Tool names to enable (all if omitted) |
+| `disable-model-invocation` | boolean | No | Require manual selection if `true` |
+| `mcp-servers` | object | No | MCP server configs (org/enterprise only) |
+| `metadata` | object | No | Key-value annotation pairs |
+
+#### Tool Aliases
+
+| Primary | Compatible aliases | Purpose |
+|---------|-------------------|---------|
+| `execute` | `shell`, `Bash`, `powershell` | Run shell commands |
+| `read` | `Read`, `NotebookRead` | Read file contents |
+| `edit` | `Edit`, `MultiEdit`, `Write`, `NotebookEdit` | Edit files |
+| `search` | `Grep`, `Glob` | Search files/text |
+| `agent` | `custom-agent`, `Task` | Invoke other agents |
+| `web` | `WebSearch`, `WebFetch` | Web search/fetch |
+| `todo` | `TodoWrite` | Manage task lists |
+
+### Agent Naming
+
+- Filename (without `.agent.md`) used as default `name` if not specified
+- Only these characters allowed: `.`, `-`, `_`, `a-z`, `A-Z`, `0-9`
+- For org/enterprise: place in root `agents/` directory (not `.github/agents/`)
+
+### Agent Versioning
+
+- Based on Git commit SHAs of the agent profile file
+- Branches/tags can have different agent versions
+- PRs use consistent agent version throughout
 
 ## Folder Structure
 
 ```
 copilot-agent-sources/  # Source materials (blog posts, docs)
-  └── github-blog.txt   # Source content about agents.md patterns
+  ├── github-blog.txt              # Original patterns source
+  ├── create-custom-agent.md       # How to create agents
+  └── custom-agents-configuration.md  # YAML configuration reference
 
-agents/                  # Generated agent.md files (create if doesn't exist)
-  └── [agent-name].md   # Individual agent definitions
+agents/                  # Generated .agent.md files
+  └── [agent-name].agent.md   # Individual agent definitions
 
 skills/                  # Additional tools (includes pdf-slides skill)
 ```
@@ -48,12 +91,12 @@ When creating an agent from source materials:
 
 1. Read the relevant source file from `copilot-agent-sources/`
 2. Extract the agent persona, commands, and best practices
-3. Create a new agent file in `agents/[agent-name].md` with this structure:
+3. Create a new agent file in `agents/[agent-name].agent.md` with this structure:
 
 ```markdown
 ---
 name: agent-name
-description: One-sentence description
+description: One-sentence description of agent's purpose and capabilities
 ---
 
 You are an expert [role] for this project.
@@ -96,11 +139,12 @@ After using an agent:
 ## Common Agent Types
 
 - **@docs-agent** - Writes documentation from code
-- **@test-agent** - Writes unit/integration tests
+- **@test-agent** - Writes unit/integration/tests
 - **@lint-agent** - Fixes code style and formatting
 - **@api-agent** - Builds API endpoints
 - **@security-agent** - Analyzes code for security issues
 - **@deploy-agent** - Handles builds and deployments
+- **@planner-agent** - Creates implementation plans (read/search/edit only)
 
 ## Skills: PDF Slides Generator
 
@@ -110,3 +154,8 @@ The `skills/pdf-slides/` folder contains a separate skill for generating PDF sli
 # Generate PDF from JSON outline
 python skills/pdf-slides/skill.py outline.json -o output.pdf
 ```
+
+## Additional Resources
+
+- [awesome-copilot community collection](https://github.com/github/awesome-copilot/tree/main/agents)
+- [Custom agents tutorials](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
