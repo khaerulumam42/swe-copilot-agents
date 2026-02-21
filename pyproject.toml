@@ -1,0 +1,36 @@
+[project]
+name = "pdf-slides-skill"
+version = "0.1.0"
+description = "Generate professional PDF slide decks from structured JSON outlines"
+readme = "skills/pdf-slides/SKILL.md"
+requires-python = ">=3.11"
+dependencies = [
+    "reportlab>=4.2.0",
+    "matplotlib>=3.9.0",
+    "pillow>=10.4.0",
+    "jinja2>=3.1.0",
+    "pyyaml>=6.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "black>=24.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+pdf-slides = "skills.pdf_slides.skill:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
