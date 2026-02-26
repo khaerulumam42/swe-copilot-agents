@@ -20,88 +20,90 @@ Based on the best practices from `copilot-agent-sources/`, each agent was evalua
 
 ### ✅ plan-executor.agent.md — GOOD
 
-| Criterion | Status |
-|-----------|--------|
-| Clear persona | ✅ "senior Python engineer who executes plans by blending seamlessly" |
-| Commands early with flags | ✅ Lines 64-76: `find`, `cat src/models/*.py`, `pytest -v` |
-| Code examples over explanations | ✅ Lines 32-47: Matching style example |
-| Clear boundaries | ✅ Always/Never sections |
-| Tech stack with versions | ✅ Now includes "Python 3.8+" |
-| Concise/value dense | ✅ 81 lines, focused |
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "senior **Python 3.8+** engineer who executes plans by **blending seamlessly** with existing codebases" |
+| Commands early with flags | ✅ | Lines 66-76: `find src/ -name "*.py"`, `cat src/models/*.py`, `pytest tests/ -v`, `python -m py_compile` |
+| Code examples over explanations | ✅ | Lines 33-47: Shows matching vs non-matching style with concrete `get_usr()` example |
+| Clear boundaries | ✅ | Lines 49-62: Always/Never sections with specific rules |
+| Tech stack with versions | ✅ | "Python 3.8+" specified on line 7 |
+| Concise/value dense | ✅ | 80 lines, focused on single responsibility |
 
-**Status:** GOOD — Minor improvement made (added Python version)
+**Status:** GOOD — Clear, focused agent with excellent style-matching examples
 
 ---
 
-### ✅ plan-reviewer.agent.md — GOOD (Streamlined)
+### ✅ plan-reviewer.agent.md — GOOD
 
-| Criterion | Status |
-|-----------|--------|
-| Clear persona | ✅ "senior code reviewer and quality assurance engineer" |
-| Commands early with flags | ✅ Comprehensive commands with flags |
-| Code examples over explanations | ✅ Report format examples |
-| Clear boundaries | ✅ Always Do / Ask First / Never Do |
-| Concise/value dense | ✅ Streamlined from 492 to ~230 lines |
-| Tech stack | ⚠️ Generic (multiple languages) |
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "senior code reviewer and quality assurance engineer who rigorously audits implementation completeness" |
+| Commands early with flags | ✅ | Lines 136-169: Multi-language commands (`pytest -v --tb=short`, `npm test`, `cargo test`, `go test ./...`, `yq`) |
+| Code examples over explanations | ✅ | Lines 59-132: Brittleness analysis examples with concrete bash commands and YAML tables |
+| Clear boundaries | ✅ | Lines 315-342: Always Do / Ask First / Never Do sections |
+| Tech stack with versions | ⚠️ | Generic multi-language (pytest, npm, cargo, go) - no specific versions |
+| Concise/value dense | ✅ | 346 lines (was 492) - streamlined |
 
-**Status:** GOOD — Streamlined from 492 lines to ~230 lines. Removed excessive report template while keeping essential workflow, status definitions, and boundaries.
+**Status:** GOOD — Streamlined from 492 to 346 lines. Excellent brittleness analysis integration with knowledge graph. Could add specific versions for each language.
 
 ---
 
 ### ✅ pytest-agent.agent.md — GOOD
 
-| Criterion | Status |
-|-----------|--------|
-| Clear persona | ✅ "senior Python QA engineer specializing in pytest" |
-| Commands early with flags | ✅ Lines 29-62: comprehensive pytest commands |
-| Code examples over explanations | ✅ Lines 133-167: Good vs Bad test examples |
-| Clear boundaries | ✅ Always Do / Ask First / Never Do |
-| Tech stack with versions | ✅ Now includes "Python 3.8+" |
-| Clarification protocol | ✅ Unique and valuable addition |
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "senior **Python 3.8+** QA engineer specializing in pytest with expert-level knowledge of mocking" |
+| Commands early with flags | ✅ | Lines 29-62: Comprehensive pytest commands with flags (`--cov=src`, `--lf`, `-k "test_payment"`, `-n auto`) |
+| Code examples over explanations | ✅ | Lines 94-121: Expert mocking examples with real code patterns; Lines 134-167: Good vs Bad test style |
+| Clear boundaries | ✅ | Lines 209-233: Always Do / Ask First / Never Do sections |
+| Tech stack with versions | ✅ | "Python 3.8+" specified on line 7 |
+| Concise/value dense | ✅ | 237 lines, focused on testing scope |
 
-**Status:** GOOD — Minor improvement made (added Python version)
+**Status:** GOOD — Comprehensive test coverage guidance with excellent mocking examples. Unique clarification protocol is valuable.
 
 ---
 
 ### ✅ knowledge-graph-agent.agent.md — EXCELLENT
 
-| Criterion | Status |
-|-----------|--------|
-| Clear persona | ✅ "expert code analysis specialist" |
-| Commands early with flags | ✅ Multi-language commands |
-| Code examples over explanations | ✅ YAML output examples |
-| Clear boundaries | ✅ Always/Ask First/Never Do |
-| Startup behavior | ✅ Unique incremental update check |
-| Tech stack with versions | ✅ "Python 3.8+, JavaScript/TypeScript ES6+, Go 1.19+, Java 17+" |
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "expert code analysis specialist who builds knowledge-base graphs from codebases" |
+| Commands early with flags | ✅ | Lines 107-164: Multi-language commands with specific tools (`ast`, `tsc --noEmit`, `go list -json`, `yq`) |
+| Code examples over explanations | ✅ | Lines 168-224: Complete YAML entry examples with bidirectional references |
+| Clear boundaries | ✅ | Lines 301-333: Always Do / Ask First / Never Do with checkboxes |
+| Tech stack with versions | ✅ | "Python 3.8+, JavaScript/TypeScript ES6+, Go 1.19+, Java 17+, Rust" |
+| Concise/value dense | ✅ | 347 lines, comprehensive for complex multi-language task |
+| Unique features | ✅ | Startup behavior with commit hash checking and incremental update mode |
 
-**Status:** EXCELLENT — This is one of the best — specific, complete with versions, clear boundaries. No changes needed.
+**Status:** EXCELLENT — Best practices exemplified: specific versions, comprehensive examples, clear boundaries, unique startup behavior for incremental updates. No changes needed.
 
 ---
 
 ### ✅ brainstormer.agent.md — GOOD
 
-| Criterion | Status |
-|-----------|--------|
-| Clear persona | ✅ "curious brainstorming specialist" |
-| Commands early with flags | ✅ Comprehensive commands |
-| Code examples over explanations | ✅ Question examples |
-| Clear boundaries | ✅ Always/Ask First/Never Do |
-| Knowledge Graph integration | ✅ Unique and valuable |
-| Tech stack | ⚠️ Not applicable (planning agent) |
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "curious brainstorming specialist who transforms vague ideas into crystal-clear specifications through thoughtful questioning" |
+| Commands early with flags | ✅ | Lines 265-294: Knowledge graph queries (`yq`, `grep`, `find`) with specific flags |
+| Code examples over explanations | ✅ | Lines 82-161: Complete plan document template; Lines 217-238: Good vs Bad question examples |
+| Clear boundaries | ✅ | Lines 296-319: Always Do / Ask First / Never Do sections |
+| Tech stack with versions | ⚠️ | Not applicable (planning agent - no code execution) |
+| Concise/value dense | ✅ | 377 lines - longer but justified for complex planning workflow |
+| Unique features | ✅ | Knowledge Graph integration (4 critical analyses), Multi-round questioning framework (1-10 rounds) |
 
-**Status:** GOOD — This agent has a unique purpose and the questioning framework is well-structured. No changes needed.
+**Status:** GOOD — Unique purpose with well-structured questioning framework and valuable knowledge graph integration. Longer length is justified by complex planning workflow.
 
 ---
 
 ## Summary Table
 
-| Agent | Status | Changes Made |
-|-------|--------|--------------|
-| plan-executor | ✅ GOOD | Added "Python 3.8+" |
-| plan-reviewer | ✅ GOOD | Streamlined from 492 to ~230 lines |
-| pytest-agent | ✅ GOOD | Added "Python 3.8+" |
-| knowledge-graph-agent | ✅ EXCELLENT | None needed |
-| brainstormer | ✅ GOOD | None needed |
+| Agent | Status | Lines | Key Strengths | Notes |
+|-------|--------|-------|---------------|-------|
+| plan-executor | ✅ GOOD | 80 | Excellent style-matching examples | Clear, focused |
+| plan-reviewer | ✅ GOOD | 346 | Brittleness analysis integration | Streamlined from 492 lines |
+| pytest-agent | ✅ GOOD | 237 | Expert mocking examples | Unique clarification protocol |
+| knowledge-graph-agent | ✅ EXCELLENT | 347 | All criteria met perfectly | Best practices exemplified |
+| brainstormer | ✅ GOOD | 377 | Knowledge Graph integration | Longer length justified |
 
 ## Best Practices Reference
 
