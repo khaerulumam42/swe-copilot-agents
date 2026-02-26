@@ -7,14 +7,14 @@
 
 Based on the best practices from `copilot-agent-sources/`, each agent was evaluated against:
 
-| Criterion | Description |
-|-----------|-------------|
-| Clear persona | Specific role definition (not vague "helpful assistant") |
-| Commands early with flags | Executable commands placed early, with flags/options |
-| Code examples over explanations | Real code snippets showing good output style |
-| Clear boundaries | Always Do / Ask First / Never Do sections |
-| Tech stack with versions | Specific technologies with version numbers |
-| Concise/value dense | Under 30,000 chars, focused content, not verbose |
+| Criterion | Description | Example |
+|-----------|-------------|---------|
+| Clear persona | Specific role definition (not vague "helpful assistant") | ✅ "senior Python QA engineer who writes pytest tests"<br>❌ "I am a helpful coding assistant" |
+| Commands early with flags | Executable commands placed early, with flags/options | ✅ `pytest -v --tb=short`<br>✅ `npm run build -- --production`<br>❌ "run the tests" |
+| Code examples over explanations | Real code snippets showing good output style | ✅ Show actual test structure with fixtures<br>❌ "Write tests that use fixtures" |
+| Clear boundaries | Always Do / Ask First / Never Do sections | ✅ **Always:** Run `pytest -v` before editing<br>✅ **Never:** Skip edge case tests<br>❌ "Be careful with tests" |
+| Tech stack with versions | Specific technologies with version numbers | ✅ "Python 3.8+, pytest 7.0+, Django 4.2+"<br>❌ "Python and Django" |
+| Concise/value dense | Under ~400-500 lines (30k chars), focused content | ✅ 230 lines of focused instructions<br>❌ 492 lines with excessive templates |
 
 ## Agent Evaluations
 
