@@ -37,10 +37,12 @@ jobs:
       - name: Install package
         run: pip install dist/*.whl
 
-      - name: Verify agents installed
+      - name: Test CLI install to current directory
         run: |
-          ls -la ~/.github/copilot/agents/
-          [ -f ~/.github/copilot/agents/dev-orchestrator.agent.md ] || exit 1
+          cd /tmp
+          awesome-copilot
+          ls -la .github/agents/
+          [ -f .github/agents/dev-orchestrator.agent.md ] || exit 1
 
   validate-agents:
     name: Validate agent files
