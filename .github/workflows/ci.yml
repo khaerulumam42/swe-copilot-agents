@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  test:
+    name: Test package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Check package
+        run: twine check --strict dist/*
+
+      - name: Install package
+        run: pip install dist/*.whl
+
+      - name: Test CLI
+        run: |
+          awesome-copilot --version
+          awesome-copilot list
+          awesome-copilot status
+
+  validate-agents:
+    name: Validate agent files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check agent files
+        run: |
+          for agent in agents/*.agent.md; do
+            if [ -f "$agent" ]; then
+              echo "Checking $agent..."
+
+              # Check for YAML frontmatter
+              if ! grep -q "^---" "$agent"; then
+                echo "❌ Missing YAML frontmatter in $agent"
+                exit 1
+              fi
+
+              # Check for name in frontmatter
+              if ! grep -q "^name:" "$agent"; then
+                echo "❌ Missing 'name' in frontmatter of $agent"
+                exit 1
+              fi
+
+              # Check for description in frontmatter
+              if ! grep -q "^description:" "$agent"; then
+                echo "❌ Missing 'description' in frontmatter of $agent"
+                exit 1
+              fi
+
+              echo "✅ $agent is valid"
+            fi
+          done
+
+      - name: Count agents
+        run: |
+          count=$(ls -1 agents/*.agent.md 2>/dev/null | wc -l)
+          echo "Found $count agent files"
+          if [ "$count" -eq 0 ]; then
+            echo "❌ No agent files found"
+            exit 1
+          fi

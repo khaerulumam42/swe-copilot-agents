@@ -1,0 +1,7 @@
+include README.md
+include CLAUDE.md
+include LICENSE
+recursive-include agents *.agent.md
+recursive-include copilot-agent-sources *
+recursive-include awesome_copilot *.py
+recursive-include skills/pdf-slides *.py
