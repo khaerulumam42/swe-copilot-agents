@@ -13,11 +13,9 @@ def _get_agents_dir() -> Optional[Path]:
     candidates = [
         # Development mode
         Path(__file__).parent.parent / "agents",
-        # Installed via pip (try both possible names)
-        Path(sys.prefix) / "share" / "awesome-copilot" / "agents",
-        Path(sys.prefix) / "share" / "swe-copilot" / "agents",
-        Path(sys.base_prefix) / "share" / "awesome-copilot" / "agents",
-        Path(sys.base_prefix) / "share" / "swe-copilot" / "agents",
+        # Installed via pip
+        Path(sys.prefix) / "share" / "swe-copilot-agents" / "agents",
+        Path(sys.base_prefix) / "share" / "swe-copilot-agents" / "agents",
     ]
 
     for candidate in candidates:
@@ -55,7 +53,7 @@ def main() -> None:
         prog="swe-copilot",
         description="Install GitHub Copilot agents to .github/agents/",
     )
-    parser.add_argument("--version", action="version", version="0.1.2")
+    parser.add_argument("--version", action="version", version="0.1.3")
 
     args = parser.parse_args()
     install()
