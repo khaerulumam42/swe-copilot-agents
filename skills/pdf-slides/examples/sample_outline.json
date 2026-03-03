@@ -1,0 +1,131 @@
+{
+  "title": "Q4 2024 Business Review",
+  "subtitle": "Strategic Growth Initiatives",
+  "author": "Jane Smith",
+  "date": "2025-01-15",
+  "branding": {
+    "primary_color": "#2E5BFF",
+    "secondary_color": "#6C7A9C",
+    "accent_color": "#00D9A0"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Q4 2024 Business Review",
+      "subtitle": "Strategic Growth Initiatives"
+    },
+    {
+      "type": "content",
+      "title": "Executive Summary",
+      "points": [
+        "Revenue increased 45% year-over-year",
+        "Expanded operations to 3 new international markets",
+        "Successfully launched two new product lines",
+        "Customer satisfaction score reached 94%"
+      ]
+    },
+    {
+      "type": "chart",
+      "title": "Quarterly Revenue Growth",
+      "chart_type": "bar",
+      "data": {
+        "labels": ["Q1", "Q2", "Q3", "Q4"],
+        "values": [120, 145, 168, 198]
+      }
+    },
+    {
+      "type": "stats",
+      "title": "Key Performance Metrics",
+      "stats": [
+        {
+          "label": "Total Revenue",
+          "value": "$6.2M",
+          "change": "+45%"
+        },
+        {
+          "label": "New Customers",
+          "value": "2,847",
+          "change": "+32%"
+        },
+        {
+          "label": "Customer Satisfaction",
+          "value": "94%",
+          "change": "+8%"
+        },
+        {
+          "label": "Market Share",
+          "value": "23.5%",
+          "change": "+5.2%"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Product Performance",
+      "section_number": "01"
+    },
+    {
+      "type": "content",
+      "title": "Product Line A",
+      "points": [
+        "Flagship product with strongest growth",
+        {
+          "heading": "Key Achievements",
+          "points": [
+            "150% increase in units sold",
+            "Expanded to 12 new countries",
+            "Achieved market leadership position"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "title": "Product Line Revenue Trend",
+      "chart_type": "area",
+      "data": {
+        "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "values": [85, 92, 105, 118, 135, 152]
+      }
+    },
+    {
+      "type": "two_column",
+      "title": "Product Comparison",
+      "left": {
+        "title": "Product Line A",
+        "points": [
+          "Premium positioning",
+          "Higher margin",
+          "Enterprise focus"
+        ]
+      },
+      "right": {
+        "title": "Product Line B",
+        "points": [
+          "Mass market appeal",
+          "Volume driven",
+          "SMB focus"
+        ]
+      }
+    },
+    {
+      "type": "chart",
+      "title": "Market Share Distribution",
+      "chart_type": "pie",
+      "data": {
+        "labels": ["Our Company", "Competitor A", "Competitor B", "Others"],
+        "values": [23.5, 31.2, 18.8, 26.5]
+      }
+    },
+    {
+      "type": "content",
+      "title": "Strategic Initiatives for 2025",
+      "points": [
+        "Launch Product Line C in Q2",
+        "Expand to APAC region",
+        "Invest in AI capabilities",
+        "Strengthen partner ecosystem"
+      ]
+    }
+  ]
+}

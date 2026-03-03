@@ -1,0 +1,49 @@
+# Slide Template Definitions
+# This file defines layout templates for different slide types.
+
+templates:
+  title:
+    description: "Cover slide with title, subtitle, author, and date"
+    layout:
+      center_content: true
+      show_logo: true
+      show_accent_line: true
+
+  content:
+    description: "Standard content slide with bullet points"
+    layout:
+      show_header: true
+      show_footer: true
+      bullet_style: "round"
+      indent_subsections: true
+
+  chart:
+    description: "Data visualization slide"
+    layout:
+      show_header: true
+      show_footer: true
+      chart_padding: 20
+
+  stats:
+    description: "Key metrics slide with value cards"
+    layout:
+      show_header: true
+      show_footer: true
+      grid:
+        max_columns: 3
+        card_height: 180
+
+  two_column:
+    description: "Side-by-side comparison slide"
+    layout:
+      show_header: true
+      show_footer: true
+      divider_line: true
+      equal_width: true
+
+  section:
+    description: "Section divider slide"
+    layout:
+      center_content: true
+      show_logo: false
+      large_number: true
