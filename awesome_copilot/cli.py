@@ -54,7 +54,7 @@ def main() -> None:
         prog="swe-copilot",
         description="Install GitHub Copilot agents to .github/agents/",
     )
-    parser.add_argument("--version", action="version", version="0.1.0")
+    parser.add_argument("--version", action="version", version="0.1.2")
 
     args = parser.parse_args()
     install()
