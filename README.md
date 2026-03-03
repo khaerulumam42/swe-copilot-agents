@@ -2,6 +2,22 @@
 
 A collection of specialized GitHub Copilot custom agents for orchestrating the complete software development lifecycle, from requirements gathering through implementation, testing, and review.
 
+## Installation
+
+Install via pip:
+
+```bash
+pip install swe-copilot-agents
+```
+
+Or install from source:
+
+```bash
+git clone https://github.com/khaerulumam42/agent-generator.git
+cd agent-generator
+pip install -e .
+```
+
 ## Overview
 
 This repository contains AI agents that follow the **"coordinator and worker" pattern**—where specialist agents perform focused work under the guidance of an orchestrator. Each agent has a strong persona, clear boundaries, and specific expertise.
@@ -287,7 +303,7 @@ When adding new agents:
 
 ## License
 
-[Your License Here]
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
