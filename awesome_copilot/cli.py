@@ -12,8 +12,10 @@ def _get_agents_dir() -> Path | None:
     candidates = [
         # Development mode
         Path(__file__).parent.parent / "agents",
-        # Installed via pip
+        # Installed via pip (try both possible names)
+        Path(sys.prefix) / "share" / "awesome-copilot" / "agents",
         Path(sys.prefix) / "share" / "swe-copilot" / "agents",
+        Path(sys.base_prefix) / "share" / "awesome-copilot" / "agents",
         Path(sys.base_prefix) / "share" / "swe-copilot" / "agents",
     ]
 

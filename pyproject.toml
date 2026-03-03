@@ -45,6 +45,7 @@ build-backend = "hatchling.build"
 [tool.hatch.build]
 include = [
     "awesome_copilot/**/*.py",
+    "awesome_copilot/**/*.pth",
     "agents/*.agent.md",
     "copilot-agent-sources/*",
     "skills/pdf-slides/**/*.py",
