@@ -40,7 +40,7 @@ jobs:
       - name: Test CLI install to current directory
         run: |
           cd /tmp
-          awesome-copilot
+          swe-copilot
           ls -la .github/agents/
           [ -f .github/agents/dev-orchestrator.agent.md ] || exit 1
 

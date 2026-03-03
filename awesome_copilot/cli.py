@@ -13,8 +13,8 @@ def _get_agents_dir() -> Path | None:
         # Development mode
         Path(__file__).parent.parent / "agents",
         # Installed via pip
-        Path(sys.prefix) / "share" / "awesome-copilot" / "agents",
-        Path(sys.base_prefix) / "share" / "awesome-copilot" / "agents",
+        Path(sys.prefix) / "share" / "swe-copilot" / "agents",
+        Path(sys.base_prefix) / "share" / "swe-copilot" / "agents",
     ]
 
     for candidate in candidates:
@@ -49,7 +49,7 @@ def main() -> None:
     import argparse
 
     parser = argparse.ArgumentParser(
-        prog="awesome-copilot",
+        prog="swe-copilot",
         description="Install GitHub Copilot agents to .github/agents/",
     )
     parser.add_argument("--version", action="version", version="0.1.0")
