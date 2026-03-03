@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/awesome-copilot-agents
+      url: https://pypi.org/p/swe-copilot-agents
 
     permissions:
       id-token: write  # IMPORTANT: required for trusted publishing
@@ -90,7 +90,7 @@ jobs:
           echo "" >> release_notes.md
           echo "### Installation" >> release_notes.md
           echo "\`\`\`bash" >> release_notes.md
-          echo "pip install --upgrade awesome-copilot-agents" >> release_notes.md
+          echo "pip install --upgrade swe-copilot-agents" >> release_notes.md
           echo "awesome-copilot install" >> release_notes.md
           echo "\`\`\`" >> release_notes.md
           echo "" >> release_notes.md

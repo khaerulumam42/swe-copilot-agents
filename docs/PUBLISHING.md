@@ -1,6 +1,6 @@
 # Publishing Guide
 
-This document explains how to publish `awesome-copilot-agents` to PyPI using GitHub Actions.
+This document explains how to publish `swe-copilot-agents` to PyPI using GitHub Actions.
 
 ## Overview
 
@@ -19,19 +19,19 @@ The project uses **Trusted Publishing** with GitHub Actions to automatically pub
 1. Go to https://pypi.org/manage/account/publishing/
 2. Click "Add a new project"
 3. Enter:
-   - **Project name**: `awesome-copilot-agents`
+   - **Project name**: `swe-copilot-agents`
    - **Owner**: Your PyPI username
    - Leave other fields blank for now
 
 ### Step 3: Configure Trusted Publishing
 
 1. Go to https://pypi.org/manage/account/publishing/
-2. Find "awesome-copilot-agents" in your projects list
+2. Find "swe-copilot-agents" in your projects list
 3. Click the project name
 4. Click "Add a new publisher"
 5. Fill in the form:
    ```
-   PyPI Project Name: awesome-copilot-agents
+   PyPI Project Name: swe-copilot-agents
    Owner: your-username
    Repository name: awesome-skills
    Workflow name: publish.yml
@@ -120,7 +120,7 @@ The CI workflow runs on every push to `master`/`main` and on all pull requests:
 ### Publisher not found
 
 If you get "Publisher not found" error:
-- Verify PyPI project name matches exactly: `awesome-copilot-agents`
+- Verify PyPI project name matches exactly: `swe-copilot-agents`
 - Verify GitHub repository name matches
 - Verify workflow name is `publish.yml`
 - Re-check the trusted publishing configuration
@@ -150,8 +150,8 @@ Agent files are bundled with the package. To update agents:
 
 Users update with:
 ```bash
-pip install --upgrade awesome-copilot-agents
-awesome-copilot install
+pip install --upgrade swe-copilot-agents
+swe-copilot
 ```
 
 ## Resources
