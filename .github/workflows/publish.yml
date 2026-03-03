@@ -91,7 +91,7 @@ jobs:
           echo "### Installation" >> release_notes.md
           echo "\`\`\`bash" >> release_notes.md
           echo "pip install --upgrade swe-copilot-agents" >> release_notes.md
-          echo "awesome-copilot install" >> release_notes.md
+          echo "swe-copilot-agents" >> release_notes.md
           echo "\`\`\`" >> release_notes.md
           echo "" >> release_notes.md
           echo "### Agents Included" >> release_notes.md
