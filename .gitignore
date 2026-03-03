@@ -36,7 +36,3 @@ htmlcov/
 dmypy.json
 
 # Local development files (kept locally but not in git)
-copilot-agent-sources/
-skills/pdf-slides/
-sample_deck.pdf
-CLAUDE.md
