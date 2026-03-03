@@ -5,9 +5,10 @@ CLI for Awesome Copilot Agents.
 import shutil
 import sys
 from pathlib import Path
+from typing import Optional
 
 
-def _get_agents_dir() -> Path | None:
+def _get_agents_dir() -> Optional[Path]:
     """Find the agents source directory."""
     candidates = [
         # Development mode
