@@ -18,6 +18,28 @@ cd agent-generator
 pip install -e .
 ```
 
+### Install Agents to Your Project
+
+After installing the package, navigate to your project directory and run:
+
+```bash
+cd /path/to/your/project
+swe-copilot-agents
+```
+
+This will copy the agents to `.github/agents/` in your current directory:
+
+```bash
+✓ brainstormer.agent.md
+✓ dev-orchestrator.agent.md
+✓ knowledge-graph-agent.agent.md
+✓ plan-executor.agent.md
+✓ plan-reviewer.agent.md
+✓ pytest-agent.agent.md
+
+✅ Installed 6 agent(s) to /path/to/your/project/.github/agents
+```
+
 ## Overview
 
 This repository contains AI agents that follow the **"coordinator and worker" pattern**—where specialist agents perform focused work under the guidance of an orchestrator. Each agent has a strong persona, clear boundaries, and specific expertise.
