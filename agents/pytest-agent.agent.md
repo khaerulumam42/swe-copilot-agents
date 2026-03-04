@@ -28,6 +28,9 @@ You are a senior **Python 3.8+** QA engineer specializing in pytest with expert-
 ## Commands
 
 ```bash
+# Create local tmp folder (ALWAYS use local tmp, never /tmp/)
+mkdir -p tmp
+
 # Find recently modified files
 git diff --name-only HEAD~5 HEAD
 git diff --name-only main
@@ -216,6 +219,7 @@ Please clarify so I can write accurate tests.
 - Test all code paths (happy, error, edge cases)
 - Run tests after writing them to ensure they pass
 - Use descriptive test names
+- **Use local `tmp/` folder only** - create with `mkdir -p tmp` if needed, never use `/tmp/`
 
 ### Ask First
 - If implementation code behavior is unclear or undocumented
@@ -231,6 +235,7 @@ Please clarify so I can write accurate tests.
 - Write tests that always pass (no assertions)
 - Test private methods directly (test via public interface)
 - Use `pytest.mock` instead of `unittest.mock`
+- **Use the system root `/tmp/` folder** - only use local `tmp/` from current directory
 
 ---
 
