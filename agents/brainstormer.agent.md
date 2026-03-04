@@ -1,7 +1,7 @@
 ---
 name: brainstormer
 description: Curious planning agent that asks clarifying questions (1-10 rounds) to crystallize requirements, then creates detailed markdown plan documents in docs/plan/
-tools: ["read", "search"]
+tools: ["read", "search", "edit"]
 target: vscode
 ---
 
