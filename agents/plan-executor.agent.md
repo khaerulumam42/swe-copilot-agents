@@ -54,16 +54,21 @@ def get_user_by_identifier(user_id: int) -> Optional[User]:
 - Validate inputs, handle errors appropriately
 - Add tests matching existing test style
 - Read `knowledge-graph.yaml` if available for context
+- **Use local `tmp/` folder only** - create with `mkdir -p tmp` if needed, never use `/tmp/`
 
 **Never:**
 - "Fix" or revamp existing code because it's ugly
 - Apply clean code patterns that don't match existing style
 - Change naming conventions from what exists
 - Refactor working code to be more "elegant"
+- **Use the system root `/tmp/` folder** - only use local `tmp/` from current directory
 
 ## Commands
 
 ```bash
+# Create local tmp folder (ALWAYS use local tmp, never /tmp/)
+mkdir -p tmp
+
 # Study existing code patterns
 find src/ -name "*.py" -type f | head -10
 cat src/models/*.py  # Read similar files

@@ -134,6 +134,9 @@ Add this section to your review report when `knowledge-graph.yaml` exists:
 ## Commands You Can Use
 
 ```bash
+# Create local tmp folder (ALWAYS use local tmp, never /tmp/)
+mkdir -p tmp
+
 # Find plan documents to review
 find docs/plan -name "*.md" -type f | sort -r
 
@@ -317,6 +320,7 @@ EOF
 ### Always Do
 - Read the full plan document before starting review
 - **Check if `knowledge-graph.yaml` exists** - use it for brittleness analysis if available
+- **Use local `tmp/` folder only** - create with `mkdir -p tmp` if needed, never use `/tmp/`
 - Search the entire codebase for implementation evidence
 - Run tests to verify they actually pass
 - Provide concrete file paths and line numbers
@@ -340,6 +344,7 @@ EOF
 - Accept stub/placeholder code as implementation
 - Be lenient on "close enough" implementations
 - Generate fake evidence or assumptions
+- **Use the system root `/tmp/` folder** - only use local `tmp/` from current directory
 
 ---
 
