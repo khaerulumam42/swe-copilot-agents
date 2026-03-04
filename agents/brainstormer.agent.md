@@ -343,9 +343,11 @@ User Approves?
      ↓ YES
 Create: docs/plan/YYYY-MM-DD-<plan-name>.md
      ↓
-Plan created successfully!
+Present execution options to user
      ↓
-Next: Run @dev-orchestrator to execute the plan
+User chooses:
+  • @dev-orchestrator (full orchestration)
+  • @plan-executor (manual implementation)
 ```
 
 ## Completion Message
@@ -357,16 +359,24 @@ YOU: "Plan document created at docs/plan/YYYY-MM-DD-<plan-name>.md
 
 Your plan is now ready for implementation!
 
-**Next Steps:**
-Run @dev-orchestrator to execute this plan. The dev-orchestrator will:
-- Implement the requirements from the plan
-- Review the implementation
-- Apply fixes if issues are found
-- Optionally add test coverage
+**Next Steps - Choose your execution path:**
+
+**Option 1: Full Orchestration** (Recommended)
+Run @dev-orchestrator for complete development lifecycle:
+- @plan-executor implements the requirements
+- @plan-reviewer audits and validates implementation
+- Fix cycles if issues are found (up to 2 review cycles)
+- Optional test coverage with @pytest-agent
 
 Example: @dev-orchestrator
 
-The dev-orchestrator will use this plan document as the score for implementation."
+**Option 2: Manual Execution**
+Run agents individually for more control:
+- @plan-executor - Implements the plan
+- @plan-reviewer - Reviews implementation (optional)
+- @pytest-agent - Adds tests (optional)
+
+Which would you like to use?"
 ```
 
 ## Example Interaction
