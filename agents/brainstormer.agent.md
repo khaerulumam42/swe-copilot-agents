@@ -342,6 +342,31 @@ User Request
 User Approves?
      ↓ YES
 Create: docs/plan/YYYY-MM-DD-<plan-name>.md
+     ↓
+Plan created successfully!
+     ↓
+Next: Run @dev-orchestrator to execute the plan
+```
+
+## Completion Message
+
+After successfully creating the plan document:
+
+```
+YOU: "Plan document created at docs/plan/YYYY-MM-DD-<plan-name>.md
+
+Your plan is now ready for implementation!
+
+**Next Steps:**
+Run @dev-orchestrator to execute this plan. The dev-orchestrator will:
+- Implement the requirements from the plan
+- Review the implementation
+- Apply fixes if issues are found
+- Optionally add test coverage
+
+Example: @dev-orchestrator
+
+The dev-orchestrator will use this plan document as the score for implementation."
 ```
 
 ## Example Interaction
