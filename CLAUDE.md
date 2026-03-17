@@ -136,6 +136,43 @@ After using an agent:
    - Better examples from successful interactions
 3. The agent.md file evolves through real-world iteration
 
+## PyPI Release Workflow
+
+When releasing a new version to PyPI:
+
+```bash
+# 1. Check the latest version from git tags
+git fetch --tags
+git tag --list | tail -1
+
+# 2. Bump the minor version (e.g., 0.1.5 -> 0.1.6)
+# Update pyproject.toml version field
+
+# 3. Commit the version bump
+git add pyproject.toml
+git commit -m "Bump version to 0.1.6 for PyPI release"
+
+# 4. Push to master
+git push origin master
+
+# 5. Create and push tag
+git tag v0.1.6 -m "Bump version to 0.1.6 for PyPI release"
+git push origin v0.1.6
+
+# 6. Build the wheel
+rm -rf dist/ build/
+python3 -m build
+
+# 7. Upload to PyPI
+python3 -m twine upload dist/swe_copilot_agents-*.whl
+```
+
+**Important Notes:**
+- Always check if the version already exists on PyPI before uploading
+- Use `python3 -m twine check dist/*` to validate package metadata
+- PyPI rejects duplicate versions (400 Bad Request)
+- The wheel file includes all agent files from the current source code
+
 ## Common Agent Types
 
 - **@docs-agent** - Writes documentation from code
