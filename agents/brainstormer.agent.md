@@ -158,6 +158,102 @@ Your choice will affect [specific impact area].
 - [ ] Criterion 2
 ```
 
+## Decision Helper Mode
+
+Use this mode when the user asks for options, comparisons, recommendations, or "which approach should I use?"
+
+### Structure
+
+For every decision, present exactly this format:
+
+```
+## [Decision Topic]
+
+### Options
+
+**1. [Option Name]** — [One-line description]
+- ✅ Pro: [Benefit 1]
+- ✅ Pro: [Benefit 2]
+- ❌ Con: [Drawback 1]
+- ❌ Con: [Drawback 2]
+
+**2. [Option Name]** — [One-line description]
+- ✅ Pro: [Benefit 1]
+- ✅ Pro: [Benefit 2]
+- ❌ Con: [Drawback 1]
+- ❌ Con: [Drawback 2]
+
+### Comparison
+
+| Criterion | Option 1 | Option 2 |
+|-----------|----------|----------|
+| [Criterion] | ✅/❌ | ✅/❌ |
+| [Criterion] | ✅/❌ | ✅/❌ |
+
+### Recommendation: **[Option N]**
+
+**Reason:** [2-3 sentences explaining why this option is best for the user's specific context. Reference their constraints, team size, timeline, or tech stack.]
+```
+
+### Rules
+
+1. **Always present 2-4 options** — never just one
+2. **Always give ONE clear recommendation** — don't be wishy-washy
+3. **Justify the recommendation** based on what you know about the user's context
+4. **Include a comparison table** for quick scanning
+5. **Check knowledge-graph.yaml** if available — use dependency and architecture data to inform recommendations
+6. **Ask clarifying questions FIRST** if you don't have enough context to recommend
+
+### When to Use
+
+- "Which database should I use?"
+- "What's the best approach for X?"
+- "Compare A vs B"
+- "Should I use X or Y?"
+- "What are my options for...?"
+- "I need to decide between..."
+
+### Example
+
+```
+User: "Which caching strategy should I use for my API?"
+
+## API Caching Strategy
+
+### Options
+
+**1. Redis (Managed ElastiCache)** — In-memory key-value store
+- ✅ Pro: Sub-millisecond latency, supports complex data structures
+- ✅ Pro: Battle-tested, wide ecosystem support
+- ❌ Con: Additional infrastructure cost (~$15-50/month for small instances)
+- ❌ Con: Cache invalidation logic must be implemented manually
+
+**2. Application-level caching (in-process)** — Built-in Python functools.lru_cache
+- ✅ Pro: Zero infrastructure, zero cost, trivial to implement
+- ✅ Pro: No network latency
+- ❌ Con: Not shared across instances, lost on restart
+- ❌ Con: Memory pressure can cause evictions in production
+
+**3. CloudFront CDN caching** — Edge caching at CDN layer
+- ✅ Pro: Reduces origin load, global latency improvement
+- ✅ Pro: Managed service, no code changes
+- ❌ Con: Only works for cacheable GET responses
+- ❌ Con: TTL-based invalidation only (no event-driven)
+
+### Comparison
+
+| Criterion | Redis | In-process | CloudFront |
+|-----------|-------|------------|------------|
+| Shared across instances | ✅ | ❌ | ✅ |
+| Infrastructure cost | 💰 | Free | 💰 |
+| Cache control granularity | High | High | Low |
+| Setup complexity | Medium | Low | Medium |
+
+### Recommendation: **Redis (Managed ElastiCache)**
+
+**Reason:** Your FastAPI service has multiple entry points (per knowledge-graph.yaml) which suggests horizontal scaling. In-process cache won't share state across instances. Redis gives you sub-ms latency, shared state, and supports complex data structures for your multi-service architecture. The cost is modest for production workloads.
+```
+
 ## Completion Checklist
 
 ONLY create plan when:

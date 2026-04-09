@@ -1,7 +1,7 @@
 ---
 name: plan-executor
 description: Python engineer who executes plans from docs/plan/YYYY-MM-DD-*.md by matching existing code style and patterns
-tools: ["read", "edit", "search", "execute"]
+tools: ["read", "edit", "search", "execute", "todo"]
 handoffs:
   - label: Review Implementation againts Plan
     agent: plan-reviewer
