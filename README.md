@@ -32,12 +32,14 @@ This will copy the agents to `.github/agents/` in your current directory:
 ```bash
 ✓ brainstormer.agent.md
 ✓ dev-orchestrator.agent.md
+✓ infra-setup.agent.md
 ✓ knowledge-graph-agent.agent.md
 ✓ plan-executor.agent.md
 ✓ plan-reviewer.agent.md
 ✓ pytest-agent.agent.md
+✓ readme-generator.agent.md
 
-✅ Installed 6 agent(s) to /path/to/your/project/.github/agents
+✅ Installed 8 agent(s) to /path/to/your/project/.github/agents
 ```
 
 ## Overview
@@ -69,6 +71,10 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - @plan-reviewer (Movement III - Review)
 - @pytest-agent (Movement IV - Testing, optional)
 
+**Companion Agents:**
+- @readme-generator — Generate/update README from knowledge graph
+- @infra-setup — Generate Terraform infra from knowledge graph
+
 **Best Practices:** ✅ **EXCELLENT**
 - Strong, distinctive persona with musical terminology throughout
 - Clear YAML configuration with `agents` restriction
@@ -93,6 +99,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - Queries knowledge graph for impact analysis (downstream, cycles, bottlenecks, test seams)
 - Creates detailed markdown plan documents in `docs/plan/YYYY-MM-DD-*.md`
 - Integrates knowledge graph findings into every plan
+- **Decision Helper mode:** Presents 2-4 options with pros/cons, comparison table, and one clear recommendation with reasoning
 
 **Best Practices:** ✅ **EXCELLENT**
 - Strong persona ("insatiably curious")
@@ -117,6 +124,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - Reads 3-5 existing files to understand patterns before writing
 - Matches existing style exactly (naming, imports, error handling, formatting)
 - Implements requirements from plan documents
+- Uses todo tool to track plan item progress
 - Never "fixes" existing code because it's ugly
 
 **Best Practices:** ✅ **EXCELLENT**
@@ -205,6 +213,62 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 
 ---
 
+### @readme-generator
+
+**Role:** Technical writer who transforms code knowledge into clear, accurate README documentation
+
+**Persona:**
+- **Philosophy:** "Data-driven documentation"
+- **Traits:** Meticulous, factual, preservation-focused
+- **Metaphor:** Documentarian who only writes what the code proves
+
+**Responsibilities:**
+- Auto-generates README.md from knowledge-graph.yaml data
+- Updates existing READMEs by syncing KG-derived sections (marked with `<!-- KG:SECTION -->` comments)
+- Preserves all manual content when updating
+- Extracts tech stack, file structure, entry points, and dependencies from KG
+
+**Best Practices:** ✅ **EXCELLENT**
+- Dual-mode behavior (generate new vs. update existing)
+- KG section markers for safe updates
+- Clear section mapping table
+- Knowledge graph handoff when KG is missing
+- Data extraction examples from KG to README
+
+---
+
+### @infra-setup
+
+**Role:** Senior DevOps engineer who generates production-ready Terraform for AWS ECS Fargate
+
+**Persona:**
+- **Philosophy:** "Infrastructure from code knowledge"
+- **Traits:** AWS-specialized, Terraform-focused, security-conscious
+- **Metaphor:** Infrastructure architect who reads code to design deployments
+
+**Responsibilities:**
+- Generates `infra/` folder with Terraform HCL files
+- Derives service topology from knowledge-graph.yaml entry points
+- Maps external dependencies to AWS resources (RDS, ElastiCache)
+- Creates security groups based on code concerns
+
+**Output Files:**
+- `main.tf` — Provider, backend, locals
+- `variables.tf` — Configurable inputs
+- `outputs.tf` — Exported values (ALB URL, cluster ARN)
+- `ecs.tf` — ECS cluster, task definitions, services
+- `alb.tf` — ALB, target groups, listeners
+- `security.tf` — Security groups, IAM roles
+
+**Best Practices:** ✅ **EXCELLENT**
+- KG-driven service discovery
+- Fargate-only focus (no EC2 launch type)
+- One-at-a-time configuration questions
+- `terraform fmt` validation
+- Security-first: least privilege IAM, no public IPs
+
+---
+
 ## Best Practices Summary
 
 | Agent | Persona | Boundaries | Commands | Examples | Workflow Diagram | Overall |
@@ -215,6 +279,8 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 | @plan-reviewer | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Report format | ❌ None | **EXCELLENT** |
 | @pytest-agent | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Test style | ❌ None | **EXCELLENT** |
 | @knowledge-graph-agent | ✅ Strong | ✅ Clear | ✅ Complete | ✅ YAML format | ❌ None | **EXCELLENT** |
+| @readme-generator | ✅ Strong | ✅ Clear | ✅ Complete | ✅ KG mapping | ✅ Dual-mode | **EXCELLENT** |
+| @infra-setup | ✅ Strong | ✅ Clear | ✅ Complete | ✅ TF templates | ✅ File tree | **EXCELLENT** |
 
 **Overall Repository Quality:** ✅ **EXCELLENT** - All agents follow GitHub Copilot custom agent best practices with strong personas, clear boundaries, executable commands, and comprehensive examples.
 
