@@ -100,14 +100,16 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - Creates detailed markdown plan documents in `docs/plan/YYYY-MM-DD-*.md`
 - Integrates knowledge graph findings into every plan
 - **Decision Helper mode:** Presents 2-4 options with pros/cons, comparison table, and one clear recommendation with reasoning
+- **Handoff support:** Offers direct handoff to @plan-executor or orchestrated execution via @dev-orchestrator
 
 **Best Practices:** ✅ **EXCELLENT**
 - Strong persona ("insatiably curious")
 - Knowledge graph integration for impact analysis
 - Multi-round questioning framework with defined stages
+- Decision Helper mode with structured options, comparison tables, and recommendations
 - Clear completion criteria (user confirmation before writing plan)
 - Comprehensive plan output template with KG analysis sections
-- Workflow summary diagram
+- Handoff support to @plan-executor or @dev-orchestrator
 
 ---
 
@@ -124,7 +126,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - Reads 3-5 existing files to understand patterns before writing
 - Matches existing style exactly (naming, imports, error handling, formatting)
 - Implements requirements from plan documents
-- Uses todo tool to track plan item progress
+- Uses `todo` tool to track plan item progress
 - Never "fixes" existing code because it's ugly
 
 **Best Practices:** ✅ **EXCELLENT**
@@ -133,6 +135,8 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - Specific matching table (naming, imports, errors, strings, formatting)
 - Clear boundaries (never "revamp" existing code)
 - Executable commands for studying patterns
+- `todo` tool integration for plan item tracking
+- Handoff support to @plan-reviewer
 
 ---
 
@@ -274,7 +278,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 | Agent | Persona | Boundaries | Commands | Examples | Workflow Diagram | Overall |
 |-------|---------|------------|----------|----------|------------------|---------|
 | @dev-orchestrator | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Musical | ✅ ASCII | **EXCELLENT** |
-| @brainstormer | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Plan format | ✅ Flowchart | **EXCELLENT** |
+| @brainstormer | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Plan format | ✅ Decision Helper | **EXCELLENT** |
 | @plan-executor | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Code style | ❌ None | **EXCELLENT** |
 | @plan-reviewer | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Report format | ❌ None | **EXCELLENT** |
 | @pytest-agent | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Test style | ❌ None | **EXCELLENT** |
