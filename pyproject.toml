@@ -1,6 +1,6 @@
 [project]
 name = "swe-copilot-agents"
-version = "0.1.7"
+version = "0.1.8"
 description = "GitHub Copilot custom agents for orchestrating the complete software development lifecycle"
 readme = "README.md"
 requires-python = ">=3.9"
