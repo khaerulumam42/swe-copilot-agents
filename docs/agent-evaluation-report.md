@@ -1,6 +1,6 @@
 # Agent Evaluation Report
 
-**Date:** 2026-02-22
+**Date:** 2026-04-20
 **Purpose:** Evaluation of all `.agent.md` files against GitHub Copilot agent best practices
 
 ## Evaluation Criteria
@@ -27,9 +27,10 @@ Based on the best practices from `copilot-agent-sources/`, each agent was evalua
 | Code examples over explanations | ✅ | Lines 33-47: Shows matching vs non-matching style with concrete `get_usr()` example |
 | Clear boundaries | ✅ | Lines 49-62: Always/Never sections with specific rules |
 | Tech stack with versions | ✅ | "Python 3.8+" specified on line 7 |
-| Concise/value dense | ✅ | 80 lines, focused on single responsibility |
+| Concise/value dense | ✅ | 90 lines, focused on single responsibility |
+| Unique features | ✅ | `todo` tool for plan item tracking; Handoff to @plan-reviewer |
 
-**Status:** GOOD — Clear, focused agent with excellent style-matching examples
+**Status:** GOOD — Clear, focused agent with excellent style-matching examples. Added `todo` tool for progress tracking and handoff support for review workflow.
 
 ---
 
@@ -79,19 +80,67 @@ Based on the best practices from `copilot-agent-sources/`, each agent was evalua
 
 ---
 
-### ✅ brainstormer.agent.md — GOOD
+### ✅ brainstormer.agent.md — EXCELLENT
 
 | Criterion | Status | Evidence |
 |-----------|--------|----------|
 | Clear persona | ✅ | "curious brainstorming specialist who transforms vague ideas into crystal-clear specifications through thoughtful questioning" |
 | Commands early with flags | ✅ | Lines 265-294: Knowledge graph queries (`yq`, `grep`, `find`) with specific flags |
-| Code examples over explanations | ✅ | Lines 82-161: Complete plan document template; Lines 217-238: Good vs Bad question examples |
-| Clear boundaries | ✅ | Lines 296-319: Always Do / Ask First / Never Do sections |
+| Code examples over explanations | ✅ | Lines 82-161: Complete plan document template; Lines 161-255: Decision Helper Mode with full example; Lines 217-238: Good vs Bad question examples |
+| Clear boundaries | ✅ | Lines 277-301: Always Do / Ask First / Never Do sections |
 | Tech stack with versions | ⚠️ | Not applicable (planning agent - no code execution) |
-| Concise/value dense | ✅ | 377 lines - longer but justified for complex planning workflow |
-| Unique features | ✅ | Knowledge Graph integration (4 critical analyses), Multi-round questioning framework (1-10 rounds) |
+| Concise/value dense | ✅ | 321 lines - justified for complex planning + decision helper workflow |
+| Unique features | ✅ | Knowledge Graph integration, Multi-round questioning (1-10 rounds), Decision Helper Mode with structured options/comparison/recommendation, Handoff support to @plan-executor and @dev-orchestrator |
 
-**Status:** GOOD — Unique purpose with well-structured questioning framework and valuable knowledge graph integration. Longer length is justified by complex planning workflow.
+**Status:** EXCELLENT — Decision Helper Mode adds structured comparison/recommendation capability. Handoff support enables seamless workflow transitions. Knowledge graph integration and multi-round questioning remain key differentiators.
+
+---
+
+### ✅ dev-orchestrator.agent.md — EXCELLENT
+
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "meticulous technical lead who conducts AI agents like an orchestra conductor" |
+| Commands early with flags | ✅ | Movement-based workflow with specific agent invocation commands, `find docs/plan/`, `cat` commands |
+| Code examples over explanations | ✅ | ASCII workflow diagram showing 4 movements, state tracking format, completion messages |
+| Clear boundaries | ✅ | Always Do / Ask First / Never Do sections with specific rules per movement |
+| Tech stack with versions | ⚠️ | Coordination agent — delegates to specialists, no direct code execution |
+| Concise/value dense | ✅ | 560 lines — justified by complex 4-movement orchestration with review cycles |
+| Unique features | ✅ | Musical metaphor throughout (movements, interludes, finale), review cycle feedback loop (max 2 reviews), human approval gates, state tracking |
+
+**Status:** EXCELLENT — Distinctive conductor persona with comprehensive lifecycle management. Review cycle feedback loop and human approval gates ensure quality. Musical terminology creates memorable, cohesive identity.
+
+---
+
+### ✅ readme-generator.agent.md — EXCELLENT
+
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "technical writer who transforms code knowledge into clear, accurate README documentation" |
+| Commands early with flags | ✅ | `yq` queries for KG sections, `grep "<!-- KG:"`, `cat README.md \| head -50` |
+| Code examples over explanations | ✅ | Complete README template, KG-to-README mapping examples, dual-mode behavior |
+| Clear boundaries | ✅ | Always Do / Ask First / Never Do — strict about preserving manual content |
+| Tech stack with versions | ⚠️ | Documentation agent — reads KG data, no specific tech stack required |
+| Concise/value dense | ✅ | 263 lines, focused on README generation and update workflows |
+| Unique features | ✅ | Dual-mode behavior (generate new vs. update existing), `<!-- KG:SECTION -->` markers for safe updates, section mapping table, KG handoff |
+
+**Status:** EXCELLENT — Unique dual-mode design solves a real problem (updating READMEs without losing manual content). KG section markers are an elegant solution for mixed human/AI documentation.
+
+---
+
+### ✅ infra-setup.agent.md — EXCELLENT
+
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "senior DevOps engineer who generates production-ready Terraform configurations for AWS ECS Fargate" |
+| Commands early with flags | ✅ | `yq` queries for KG parsing, `terraform fmt -check`, `terraform validate` |
+| Code examples over explanations | ✅ | Complete Terraform HCL templates (main.tf, variables.tf, outputs.tf, ecs.tf, alb.tf, security.tf) |
+| Clear boundaries | ✅ | Always Do / Ask First / Never Do — strict about no `terraform apply`, no secrets, Fargate only |
+| Tech stack with versions | ✅ | AWS ECS Fargate, Terraform >= 1.0, AWS provider ~> 5.0 |
+| Concise/value dense | ✅ | 351 lines — justified by complete infrastructure generation with 6 output files |
+| Unique features | ✅ | KG-driven service discovery (entry_points → ECS services, dependencies → resources, concerns → security groups), one-at-a-time configuration questions |
+
+**Status:** EXCELLENT — KG-driven infrastructure generation is a unique and valuable approach. Maps code architecture directly to AWS resources. Security-first IAM policies and Fargate-only constraint are well-defined.
 
 ---
 
@@ -99,11 +148,14 @@ Based on the best practices from `copilot-agent-sources/`, each agent was evalua
 
 | Agent | Status | Lines | Key Strengths | Notes |
 |-------|--------|-------|---------------|-------|
-| plan-executor | ✅ GOOD | 80 | Excellent style-matching examples | Clear, focused |
-| plan-reviewer | ✅ GOOD | 346 | Brittleness analysis integration | Streamlined from 492 lines |
-| pytest-agent | ✅ GOOD | 237 | Expert mocking examples | Unique clarification protocol |
+| dev-orchestrator | ✅ EXCELLENT | 560 | Orchestra conductor persona, review cycles | Manages full lifecycle |
+| brainstormer | ✅ EXCELLENT | 321 | Decision Helper Mode, KG integration | Handoff to executor/orchestrator |
+| plan-executor | ✅ GOOD | 90 | Excellent style-matching examples | Added `todo` tool, handoff to reviewer |
+| plan-reviewer | ✅ GOOD | 351 | Brittleness analysis integration | Streamlined from 492 lines |
+| pytest-agent | ✅ GOOD | 242 | Expert mocking examples | Unique clarification protocol |
 | knowledge-graph-agent | ✅ EXCELLENT | 347 | All criteria met perfectly | Best practices exemplified |
-| brainstormer | ✅ GOOD | 377 | Knowledge Graph integration | Longer length justified |
+| readme-generator | ✅ EXCELLENT | 263 | Dual-mode (generate/update), KG markers | Preserves manual content |
+| infra-setup | ✅ EXCELLENT | 351 | KG-driven Terraform, Fargate-focused | Security-first IAM |
 
 ## Best Practices Reference
 
