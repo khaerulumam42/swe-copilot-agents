@@ -144,11 +144,28 @@ Based on the best practices from `copilot-agent-sources/`, each agent was evalua
 
 ---
 
+### ✅ rug-orchestrator.agent.md — EXCELLENT
+
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Clear persona | ✅ | "pure delegation orchestrator following the RUG pattern (Repeat Until Good). You NEVER do implementation work yourself" |
+| Commands early with flags | ✅ | `find docs/plan -name "*.md" -type f \| sort -r`, `test -f knowledge-graph.yaml`, `cat docs/plan/YYYY-MM-DD-*.md` |
+| Code examples over explanations | ✅ | Complete orchestration flow per phase with exact delegation prompts, RUG decomposition rules, parallel execution pattern, result routing table |
+| Clear boundaries | ✅ | Strictly limited to `agent`, `read`, `search` tools — NEVER `edit` or `execute`. Always/Ask First/Never Do sections enforce RUG principles |
+| Tech stack with versions | ⚠️ | Orchestration agent — delegates to specialists, no direct code execution |
+| Concise/value dense | ✅ | 451 lines — justified by comprehensive 6-phase orchestration with RUG loop, task decomposition, and failure mode tables |
+| Unique features | ✅ | RUG pattern (Repeat Until Good) with mandatory validation per task, max 3 retries with escalation, parallel execution support, task decomposition rules (one file = one subagent task), common failure modes table |
+
+**Status:** EXCELLENT — The RUG pattern is a significant innovation over @dev-orchestrator. Pure delegation preserves orchestrator context. Mandatory per-task validation with retry loop ensures quality. Task decomposition rules prevent monolithic delegation. Parallel execution pattern enables efficient multi-task orchestration.
+
+---
+
 ## Summary Table
 
 | Agent | Status | Lines | Key Strengths | Notes |
 |-------|--------|-------|---------------|-------|
 | dev-orchestrator | ✅ EXCELLENT | 560 | Orchestra conductor persona, review cycles | Manages full lifecycle |
+| rug-orchestrator | ✅ EXCELLENT | 451 | RUG pattern, pure delegation, mandatory validation | Per-task retry loop, parallel execution |
 | brainstormer | ✅ EXCELLENT | 321 | Decision Helper Mode, KG integration | Handoff to executor/orchestrator |
 | plan-executor | ✅ GOOD | 90 | Excellent style-matching examples | Added `todo` tool, handoff to reviewer |
 | plan-reviewer | ✅ GOOD | 351 | Brittleness analysis integration | Streamlined from 492 lines |
