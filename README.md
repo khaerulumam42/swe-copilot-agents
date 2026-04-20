@@ -38,8 +38,9 @@ This will copy the agents to `.github/agents/` in your current directory:
 ✓ plan-reviewer.agent.md
 ✓ pytest-agent.agent.md
 ✓ readme-generator.agent.md
+✓ rug-orchestrator.agent.md
 
-✅ Installed 8 agent(s) to /path/to/your/project/.github/agents
+✅ Installed 9 agent(s) to /path/to/your/project/.github/agents
 ```
 
 ## Overview
@@ -85,7 +86,39 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 
 ---
 
-### @brainstormer
+### @rug-orchestrator
+
+**Role:** Pure delegation orchestrator following the RUG pattern (Repeat Until Good) — NEVER implements, only delegates
+
+**Persona:**
+- **Philosophy:** "Repeat Until Good" — every task validated, failed tasks retried
+- **Traits:** Pure delegator, context-preserving, validation-obsessed
+- **Constraint:** Only uses `agent`, `read`, `search` tools — NEVER `edit` or `execute`
+
+**Responsibilities:**
+- Delegates ALL implementation work to specialist subagents (preserves context window)
+- Decomposes plans into granular tasks (one file = one subagent task)
+- Validates EVERY task via separate @plan-reviewer (mandatory, not optional)
+- Retries failed tasks with improved instructions (up to 3 times, then escalates)
+- Supports parallel execution for independent tasks
+
+**Orchestrated Agents:**
+- @brainstormer (Phase 1 - Planning, if no plan exists)
+- @plan-executor (Phase 3 - Implementation per decomposed task)
+- @plan-reviewer (Phase 4 - Mandatory validation for every task)
+- @pytest-agent (Phase 6 - Testing, optional)
+
+**RUG Loop:** Implement → Validate → If FAIL, retry (up to 3x) → If still FAIL, escalate to human
+
+**Best Practices:** ✅ **EXCELLENT**
+- Distinctive RUG pattern differentiates from @dev-orchestrator
+- Task decomposition rules prevent monolithic delegation
+- Mandatory per-task validation ensures quality
+- Common failure modes table teaches anti-patterns
+- Parallel execution pattern for efficiency
+- Result routing table clarifies all state transitions
+
+---
 
 **Role:** Curious planning agent who asks clarifying questions to crystallize requirements
 
@@ -278,6 +311,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 | Agent | Persona | Boundaries | Commands | Examples | Workflow Diagram | Overall |
 |-------|---------|------------|----------|----------|------------------|---------|
 | @dev-orchestrator | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Musical | ✅ ASCII | **EXCELLENT** |
+| @rug-orchestrator | ✅ Strong | ✅ RUG | ✅ Complete | ✅ Decomposition | ✅ ASCII Flow | **EXCELLENT** |
 | @brainstormer | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Plan format | ✅ Decision Helper | **EXCELLENT** |
 | @plan-executor | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Code style | ❌ None | **EXCELLENT** |
 | @plan-reviewer | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Report format | ❌ None | **EXCELLENT** |
@@ -286,7 +320,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 | @readme-generator | ✅ Strong | ✅ Clear | ✅ Complete | ✅ KG mapping | ✅ Dual-mode | **EXCELLENT** |
 | @infra-setup | ✅ Strong | ✅ Clear | ✅ Complete | ✅ TF templates | ✅ File tree | **EXCELLENT** |
 
-**Overall Repository Quality:** ✅ **EXCELLENT** - All agents follow GitHub Copilot custom agent best practices with strong personas, clear boundaries, executable commands, and comprehensive examples.
+**Overall Repository Quality:** ✅ **EXCELLENT** - All 9 agents follow GitHub Copilot custom agent best practices with strong personas, clear boundaries, executable commands, and comprehensive examples.
 
 ---
 
