@@ -15,8 +15,8 @@
 | knowledge-graph-agent | 347 lines | 90 lines | ~74% |
 | plan-reviewer | 351 lines | 107 lines | ~70% |
 | brainstormer | 321 lines | 105 lines | ~67% |
-| rug-orchestrator | 658 lines | TBD | TBD |
-| **Total** | **2,272 lines** | **TBD** | **TBD** |
+| rug-orchestrator | 658 lines | 117 lines | ~82% |
+| **Total** | **2,272 lines** | **675 lines** | **~70%** |
 
 ---
 
@@ -170,5 +170,36 @@
 - Replaced Plan Document Template with section name list
 - Replaced Completion Message code block with 2-bullet next steps
 - Removed bottom tagline
+
+---
+
+## rug-orchestrator (658 lines → ~105 lines, ~84% reduction)
+
+### ✅ Already Good
+- YAML frontmatter complete (name, description, tools, agents, target)
+- Cardinal Rule clearly stated and emphasized
+- Orchestra table (5 specialists) — concise, useful
+- Result Routing Table — well structured
+- Three-tier boundaries (Always/Ask First/Never)
+- Narrowed toolset: `["agent", "read", "search"]`
+- Subagent Tool Autonomy section — critical behavioral rule
+
+### ❌ Needs Improvement
+- Every phase (0, 0.5, 1, 2, 3, 4, 5, 6) has "YOU:" dialogue example blocks totaling ~250 lines (Priority 1: remove inline examples)
+- 85-line ASCII art diagram (Priority 1: prose→structured)
+- Session Initialization welcome message is 30 lines (Priority 1: inline example)
+- Common Failure Modes table has 11 rows of verbose descriptions (Priority 1: condense)
+- Task Decomposition Examples has BAD+GOOD pair totaling 25 lines (Priority 1: keep ONE example)
+- Parallel Execution Pattern dialogue example is 25 lines (Priority 1: remove inline example)
+- Commands section is verbose (Priority 1: condense to rules)
+
+### 💡 Changes Applied
+- Replaced all "YOU:" dialogue blocks with 2–3 bullet behavioral descriptions per phase
+- Replaced 85-line ASCII diagram with 1-line phase sequence
+- Replaced session init welcome with 4-bullet capability summary in session start
+- Trimmed Common Failure Modes to 5 most critical rows
+- Removed BAD decomposition example; kept GOOD example (condensed)
+- Replaced Parallel Execution dialogue with 3-bullet description
+- Replaced Commands section with 4-bullet delegation rules
 
 ---
