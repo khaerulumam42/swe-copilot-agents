@@ -142,6 +142,33 @@ Instructions:
 
 [AWAIT completion]
 
+YOU: "Knowledge graph verified. Reading dependency relationships..."
+
+[Use the read tool to read knowledge-graph.yaml]
+
+YOU: "Dependency graph loaded. Found relationships for [N] functions across [M] files.
+Key dependencies for planned work:
+- [File/function from plan] → calls [dependencies]
+- [File/function from plan] → called by [dependents]"
+
+[If the read tool fails or file is corrupted]
+
+YOU: "Warning: Could not read knowledge-graph.yaml successfully.
+Error: [error message]
+
+Attempting to regenerate via @knowledge-graph-agent..."
+
+[Delegate to @knowledge-graph-agent to recreate the file]
+
+[If regeneration succeeds]
+YOU: "Knowledge graph regenerated successfully. Proceeding with Phase 3."
+
+[If regeneration also fails]
+YOU: "Unable to load dependency graph after regeneration attempt.
+Proceeding WITHOUT dependency context - @plan-executor will work without this information.
+Manual review recommended after implementation."
+
+[If read succeeds]
 YOU: "Knowledge graph check complete. Proceeding to Phase 3."
 ```
 
