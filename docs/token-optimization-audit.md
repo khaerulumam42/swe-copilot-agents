@@ -13,7 +13,7 @@
 | pytest-agent | 242 lines | 94 lines | ~61% |
 | readme-generator | 263 lines | 92 lines | ~65% |
 | knowledge-graph-agent | 347 lines | 90 lines | ~74% |
-| plan-reviewer | 351 lines | TBD | TBD |
+| plan-reviewer | 351 lines | 107 lines | ~70% |
 | brainstormer | 321 lines | TBD | TBD |
 | rug-orchestrator | 658 lines | TBD | TBD |
 | **Total** | **2,272 lines** | **TBD** | **TBD** |
@@ -88,6 +88,33 @@
 - Removed all 3 Analysis Standards YAML examples — naming conventions bullet is sufficient
 - Replaced 4 web framework code blocks with single-line pattern description
 - Condensed incremental update steps to 3 bullets inside Scanning Strategy section
+
+---
+
+## plan-reviewer (351 lines → ~90 lines, ~74% reduction)
+
+### ✅ Already Good
+- YAML frontmatter complete (name, description, tools)
+- Clear role sentence + core philosophy
+- Execution Status Definitions table — concise, clear
+- Evidence Gathering Checklist
+- Priority Assignment Criteria table
+- Three-tier boundaries (Always/Ask First/Never)
+- Read-only toolset: `["read", "search", "execute"]`
+
+### ❌ Needs Improvement
+- Full Report Output Format markdown template is 80 lines (Priority 1: remove inline examples)
+- Brittleness analysis report format block duplicates the section above it ~35 lines (Priority 1: remove duplication)
+- Status Determination Rules section duplicates the Execution Status table (Priority 1: remove duplication)
+- Commands section has 12 commands, many rarely used (Priority 2: condense to essentials)
+- Bottom tagline is unnecessary overhead
+
+### 💡 Changes Applied
+- Replaced 80-line report template with 1-line section list
+- Removed duplicate brittleness report format — kept 3 bash commands + risk levels table only
+- Removed Status Determination Rules (information already in Execution Status table)
+- Condensed commands to 6 essential ones
+- Removed bottom tagline
 
 ---
 
