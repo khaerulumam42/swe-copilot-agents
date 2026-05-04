@@ -14,7 +14,7 @@
 | readme-generator | 263 lines | 92 lines | ~65% |
 | knowledge-graph-agent | 347 lines | 90 lines | ~74% |
 | plan-reviewer | 351 lines | 107 lines | ~70% |
-| brainstormer | 321 lines | TBD | TBD |
+| brainstormer | 321 lines | 105 lines | ~67% |
 | rug-orchestrator | 658 lines | TBD | TBD |
 | **Total** | **2,272 lines** | **TBD** | **TBD** |
 
@@ -138,6 +138,37 @@
 - Replaced 40-line README template with section name list (9 sections)
 - Replaced 3 KG extraction examples with 4-bullet data mapping summary
 - Replaced completion message block with 2 bullets inside Boundaries
+- Removed bottom tagline
+
+---
+
+## brainstormer (321 lines → ~95 lines, ~70% reduction)
+
+### ✅ Already Good
+- YAML frontmatter complete (name, description, tools, target, handoffs)
+- Role sentence + output + constraint
+- Commands section with knowledge graph queries
+- Knowledge graph section (optional, non-blocking)
+- Track Progress 4-round guide
+- Three-tier boundaries (✅/⚠️/🚫)
+- Narrowed toolset: `["read", "search", "edit/createDirectory", "edit/createFile"]`
+
+### ❌ Needs Improvement
+- ASCII cycle diagram (15 lines) — prose should be structured (Priority 1)
+- "Example in Action" full Q&A (~20 lines) — inline example (Priority 1)
+- "Always Present Options" format template (~15 lines) — duplicate of boundaries (Priority 1)
+- Decision Helper Mode full section with Redis caching example (~75 lines) — inline examples (Priority 1)
+- Plan Document Template full markdown (~40 lines) — inline example; replace with section list (Priority 1)
+- Completion Message code block (~15 lines) — inline example (Priority 1)
+- Bottom tagline unnecessary
+
+### 💡 Changes Applied
+- Replaced ASCII cycle diagram with 3-bullet questioning cycle description
+- Removed "Example in Action" Q&A session
+- Removed "Always Present Options" template block (preserved as 2-line rule in questioning process)
+- Condensed Decision Helper Mode from 75 to 5-line description
+- Replaced Plan Document Template with section name list
+- Replaced Completion Message code block with 2-bullet next steps
 - Removed bottom tagline
 
 ---
