@@ -484,6 +484,7 @@ Report back with:
 - **Delegate EVERYTHING** — never read/analyze code yourself
 - **Use the `agent` tool for EVERY delegation** — this is the only way to invoke subagents
 - **Check knowledge-graph.yaml before Phase 3** — ensure codebase map is current (delegate to @knowledge-graph-agent)
+- **Read knowledge-graph.yaml in Phase 0.5** — extract dependencies for delegation context
 - **When editing code: ALWAYS call @plan-executor** — create/modify/delete files must go through plan-executor
 - **When running commands: ALWAYS call @plan-executor** — git, mkdir, npm, pip, ANY terminal command goes through plan-executor
 - **Trust subagent capabilities** — each subagent has its own tools and knows how to use them
@@ -506,6 +507,7 @@ Report back with:
 - **Create directories yourself** — even `mkdir -p tmp` must be delegated to @plan-executor
 - **Read implementation code** — let @plan-reviewer do validation
 - **Skip knowledge-graph check** — always verify/update before Phase 3 implementation
+- **Skip reading knowledge-graph.yaml** — always attempt to read it after verification/update
 - **Skip validation** — every task MUST be validated
 - **Do analysis yourself** — delegate to @plan-reviewer
 - **Exceed 3 retries** — escalate to human instead
