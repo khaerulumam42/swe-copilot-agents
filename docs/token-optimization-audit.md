@@ -10,7 +10,33 @@
 | Agent | Before | After | Reduction |
 |-------|--------|-------|-----------|
 | plan-executor | 90 lines | 70 lines | ~22% |
-| pytest-agent | 242 lines | TBD | TBD |
+| pytest-agent | 242 lines | 94 lines | ~61% |
+
+## pytest-agent (242 lines → ~75 lines, ~69% reduction)
+
+### ✅ Already Good
+- YAML frontmatter complete (name, description, tools)
+- Clear role/persona sentence
+- Commands section with flags
+- Test Coverage Requirements table — concise, informative
+- Three-tier boundaries (Always/Ask First/Never)
+- Narrowed toolset: `["read", "edit", "search", "execute"]`
+
+### ❌ Needs Improvement
+- Expert Mocking & Patching section has 30-line code block (Priority 1: remove inline examples)
+- Standards > Code Style Example is 30 lines with 4 code blocks (Priority 1: keep ONE real example)
+- Clarification Protocol includes 20-line formatted example block (Priority 1: prose→structured)
+- Scope Boundaries section duplicates Boundaries section (Priority 1: remove duplication)
+- Bottom tagline is unnecessary overhead
+
+### 💡 Changes Applied
+- Replaced 30-line mocking code block with 5-bullet technique list
+- Kept ONE 4-line good/bad test name contrast as the single code example
+- Replaced clarification example block with 5-bullet list of what to ask
+- Merged Scope Boundaries into main Boundaries section
+- Removed bottom tagline
+
+---
 | readme-generator | 263 lines | TBD | TBD |
 | knowledge-graph-agent | 347 lines | TBD | TBD |
 | plan-reviewer | 351 lines | TBD | TBD |
