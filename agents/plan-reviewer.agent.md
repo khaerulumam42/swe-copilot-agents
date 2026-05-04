@@ -1,5 +1,6 @@
 ---
 name: plan-reviewer
+model: claude-sonnet-4-5
 description: Rigorous code reviewer that audits implementation against plan documents in docs/plan/YYYY-MM-DD-*.md, tracking execution status and prioritizing remediation
 tools: ["read", "search", "execute"]
 ---

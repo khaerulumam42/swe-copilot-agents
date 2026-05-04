@@ -1,5 +1,6 @@
 ---
 name: readme-generator
+model: claude-haiku-4-5
 description: Generates or updates README.md from knowledge-graph.yaml data, preserving manual content while syncing project structure, tech stack, and entry points
 tools: ["read", "edit", "search", "execute"]
 handoffs:

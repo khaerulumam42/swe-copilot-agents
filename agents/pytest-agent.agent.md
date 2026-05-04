@@ -1,5 +1,6 @@
 ---
 name: pytest-agent
+model: claude-haiku-4-5
 description: Expert Python QA engineer who creates comprehensive pytest test suites with expert-level mocking and patching for newly implemented code
 tools: ["read", "edit", "search", "execute"]
 ---
