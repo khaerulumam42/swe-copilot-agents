@@ -1,5 +1,6 @@
 ---
 name: plan-executor
+model: claude-sonnet-4-5
 description: Python engineer who executes plans from docs/plan/YYYY-MM-DD-*.md by matching existing code style and patterns
 tools: ["read", "edit", "search", "execute", "todo"]
 handoffs:

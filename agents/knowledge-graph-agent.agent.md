@@ -1,5 +1,6 @@
 ---
 name: knowledge-graph-agent
+model: claude-haiku-4-5
 description: Scans codebases and creates YAML knowledge-base graphs representing file/function relationships for LLM code flow analysis
 tools: ["read", "search", "execute", "edit"]
 ---

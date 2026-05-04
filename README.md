@@ -31,8 +31,6 @@ This will copy the agents to `.github/agents/` in your current directory:
 
 ```bash
 ✓ brainstormer.agent.md
-✓ dev-orchestrator.agent.md
-✓ infra-setup.agent.md
 ✓ knowledge-graph-agent.agent.md
 ✓ plan-executor.agent.md
 ✓ plan-reviewer.agent.md
@@ -40,7 +38,7 @@ This will copy the agents to `.github/agents/` in your current directory:
 ✓ readme-generator.agent.md
 ✓ rug-orchestrator.agent.md
 
-✅ Installed 9 agent(s) to /path/to/your/project/.github/agents
+✅ Installed 7 agent(s) to /path/to/your/project/.github/agents
 ```
 
 ## Overview
@@ -50,41 +48,6 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 ---
 
 ## Agents
-
-### @dev-orchestrator
-
-**Role:** Meticulous technical lead who conducts specialist agents like an orchestra conductor
-
-**Persona:**
-- **Philosophy:** "Right agent, right time, right order"
-- **Traits:** Meticulous, patient, organized, clear
-- **Metaphor:** Orchestra conductor who doesn't play instruments but brings out the best performance from each soloist
-
-**Responsibilities:**
-- Coordinates the complete development lifecycle across 4 movements
-- Tracks state obsessively (which movement, which soloist, which outputs)
-- Manages review cycles with automatic fix loops (max 2 reviews)
-- Seeks human approval at each intermission
-
-**Orchestrated Agents:**
-- @brainstormer (Movement I - Planning)
-- @plan-executor (Movement II - Implementation)
-- @plan-reviewer (Movement III - Review)
-- @pytest-agent (Movement IV - Testing, optional)
-
-**Companion Agents:**
-- @readme-generator — Generate/update README from knowledge graph
-- @infra-setup — Generate Terraform infra from knowledge graph
-
-**Best Practices:** ✅ **EXCELLENT**
-- Strong, distinctive persona with musical terminology throughout
-- Clear YAML configuration with `agents` restriction
-- Visual workflow diagram (ASCII art)
-- Comprehensive error handling and human intervention pathways
-- Review cycle feedback loop with automatic fixes
-- Memorable tagline: *"A great conductor doesn't play every instrument—they know exactly when each section should perform."*
-
----
 
 ### @rug-orchestrator
 
@@ -111,7 +74,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 **RUG Loop:** Implement → Validate → If FAIL, retry (up to 3x) → If still FAIL, escalate to human
 
 **Best Practices:** ✅ **EXCELLENT**
-- Distinctive RUG pattern differentiates from @dev-orchestrator
+- Distinctive RUG pattern with pure-delegation approach
 - Task decomposition rules prevent monolithic delegation
 - Mandatory per-task validation ensures quality
 - Common failure modes table teaches anti-patterns
@@ -119,6 +82,8 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - Result routing table clarifies all state transitions
 
 ---
+
+### @brainstormer
 
 **Role:** Curious planning agent who asks clarifying questions to crystallize requirements
 
@@ -133,7 +98,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - Creates detailed markdown plan documents in `docs/plan/YYYY-MM-DD-*.md`
 - Integrates knowledge graph findings into every plan
 - **Decision Helper mode:** Presents 2-4 options with pros/cons, comparison table, and one clear recommendation with reasoning
-- **Handoff support:** Offers direct handoff to @plan-executor or orchestrated execution via @dev-orchestrator
+- **Handoff support:** Offers direct handoff to @plan-executor or orchestrated execution via @rug-orchestrator
 
 **Best Practices:** ✅ **EXCELLENT**
 - Strong persona ("insatiably curious")
@@ -142,7 +107,7 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 - Decision Helper mode with structured options, comparison tables, and recommendations
 - Clear completion criteria (user confirmation before writing plan)
 - Comprehensive plan output template with KG analysis sections
-- Handoff support to @plan-executor or @dev-orchestrator
+- Handoff support to @plan-executor or @rug-orchestrator
 
 ---
 
@@ -274,43 +239,10 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 
 ---
 
-### @infra-setup
-
-**Role:** Senior DevOps engineer who generates production-ready Terraform for AWS ECS Fargate
-
-**Persona:**
-- **Philosophy:** "Infrastructure from code knowledge"
-- **Traits:** AWS-specialized, Terraform-focused, security-conscious
-- **Metaphor:** Infrastructure architect who reads code to design deployments
-
-**Responsibilities:**
-- Generates `infra/` folder with Terraform HCL files
-- Derives service topology from knowledge-graph.yaml entry points
-- Maps external dependencies to AWS resources (RDS, ElastiCache)
-- Creates security groups based on code concerns
-
-**Output Files:**
-- `main.tf` — Provider, backend, locals
-- `variables.tf` — Configurable inputs
-- `outputs.tf` — Exported values (ALB URL, cluster ARN)
-- `ecs.tf` — ECS cluster, task definitions, services
-- `alb.tf` — ALB, target groups, listeners
-- `security.tf` — Security groups, IAM roles
-
-**Best Practices:** ✅ **EXCELLENT**
-- KG-driven service discovery
-- Fargate-only focus (no EC2 launch type)
-- One-at-a-time configuration questions
-- `terraform fmt` validation
-- Security-first: least privilege IAM, no public IPs
-
----
-
 ## Best Practices Summary
 
 | Agent | Persona | Boundaries | Commands | Examples | Workflow Diagram | Overall |
 |-------|---------|------------|----------|----------|------------------|---------|
-| @dev-orchestrator | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Musical | ✅ ASCII | **EXCELLENT** |
 | @rug-orchestrator | ✅ Strong | ✅ RUG | ✅ Complete | ✅ Decomposition | ✅ ASCII Flow | **EXCELLENT** |
 | @brainstormer | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Plan format | ✅ Decision Helper | **EXCELLENT** |
 | @plan-executor | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Code style | ❌ None | **EXCELLENT** |
@@ -318,51 +250,46 @@ This repository contains AI agents that follow the **"coordinator and worker" pa
 | @pytest-agent | ✅ Strong | ✅ Clear | ✅ Complete | ✅ Test style | ❌ None | **EXCELLENT** |
 | @knowledge-graph-agent | ✅ Strong | ✅ Clear | ✅ Complete | ✅ YAML format | ❌ None | **EXCELLENT** |
 | @readme-generator | ✅ Strong | ✅ Clear | ✅ Complete | ✅ KG mapping | ✅ Dual-mode | **EXCELLENT** |
-| @infra-setup | ✅ Strong | ✅ Clear | ✅ Complete | ✅ TF templates | ✅ File tree | **EXCELLENT** |
 
-**Overall Repository Quality:** ✅ **EXCELLENT** - All 9 agents follow GitHub Copilot custom agent best practices with strong personas, clear boundaries, executable commands, and comprehensive examples.
+**Overall Repository Quality:** ✅ **EXCELLENT** - All 7 agents follow GitHub Copilot custom agent best practices with strong personas, clear boundaries, executable commands, and token-optimized instructions.
 
 ---
 
 ## Workflow Orchestration
 
-### Complete Development Cycle
+### Complete Development Cycle (RUG Pattern)
 
 ```
 User Request
       ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│                    @dev-orchestrator (Conductor)                 │
+│                    @rug-orchestrator (Pure Delegator)            │
 └─────────────────────────────────────────────────────────────────┘
       │
-      ├─ Movement I: @brainstormer → Plan document
-      │     (1-10 rounds of questions)
+      ├─ Phase 1: @brainstormer → Plan document
+      │     (clarifying questions → plan in docs/plan/)
       │     ↓ Human Approval
       │
-      ├─ Movement II: @plan-executor → Implementation
-      │     (Match existing code patterns)
-      │     ↓ Human Approval
+      ├─ Phase 2: @plan-executor → Implementation (per task)
+      │     (one file = one subagent task)
       │
-      ├─ Movement III: @plan-reviewer → Review #1
-      │     ↓ Major issues found?
-      │     ├─ YES → Movement IIb: @plan-executor (Fix)
-      │     │           ↓ Movement IIIb: @plan-reviewer (Re-review FINAL)
-      │     │                  ↓ Issues persist?
-      │     │                  └─ YES → Human Intervention
-      │     └─ NO → Continue
-      │     ↓ Human Approval
+      ├─ Phase 3: @plan-reviewer → Mandatory validation
+      │     ↓ PASS or FAIL?
+      │     ├─ FAIL → Retry @plan-executor (up to 3×)
+      │     │           └─ Still FAIL → Escalate to Human
+      │     └─ PASS → Continue
       │
-      └─ Movement IV: @pytest-agent → Tests (Optional)
+      └─ Phase 4: @pytest-agent → Tests (Optional)
             ↓
-         Finale
+         Done
 ```
 
-### Review Cycle Logic
+### RUG Loop Logic
 
-1. **Review #1** identifies issues → If major issues found, trigger fix cycle
-2. **Fix Cycle** (@plan-executor) implements recommendations
-3. **Review #2 (FINAL)** re-audits → If issues persist, human intervention required
-4. **Maximum 2 reviews** enforced
+1. Each task delegated to @plan-executor individually (preserves context window)
+2. @plan-reviewer validates **every** task — never skipped
+3. Failed tasks retried up to 3× with improved instructions
+4. After 3 failures, escalate to human with full context
 
 ---
 
@@ -371,8 +298,8 @@ User Request
 ### Basic Agent Invocation
 
 ```bash
-# In VS Code with GitHub Copilot Chat
-@dev-orchestrator
+# In VS Code with GitHub Copilot Chat — start with the orchestrator
+@rug-orchestrator
 I want to add a user authentication system with JWT tokens
 
 # Or invoke a specific agent directly
