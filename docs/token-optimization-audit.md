@@ -11,8 +11,36 @@
 |-------|--------|-------|-----------|
 | plan-executor | 90 lines | 70 lines | ~22% |
 | pytest-agent | 242 lines | 94 lines | ~61% |
+| readme-generator | 263 lines | 92 lines | ~65% |
+| knowledge-graph-agent | 347 lines | TBD | TBD |
+| plan-reviewer | 351 lines | TBD | TBD |
+| brainstormer | 321 lines | TBD | TBD |
+| rug-orchestrator | 658 lines | TBD | TBD |
+| **Total** | **2,272 lines** | **TBD** | **TBD** |
 
-## pytest-agent (242 lines → ~75 lines, ~69% reduction)
+---
+
+## plan-executor (90 lines → 70 lines, ~22% reduction)
+
+### ✅ Already Good
+- YAML frontmatter complete (name, description, tools, handoffs)
+- Clear role/persona sentence
+- Commands section present with flags
+- What to Match table — concise, no prose
+- Three-tier boundaries (Always/Never)
+- Narrowed toolset: `["read", "edit", "search", "execute", "todo"]`
+
+### ❌ Needs Improvement
+- Python code style comparison block is 15 lines — too many examples (Priority 1: keep ONE real example)
+- Bottom tagline is unnecessary token overhead
+
+### 💡 Changes Applied
+- Replaced 15-line Python triple-comparison block with a 7-line two-case contrast showing the key insight only
+- Removed bottom tagline (`*When in Rome...`)
+
+---
+
+## pytest-agent (242 lines → 94 lines, ~61% reduction)
 
 ### ✅ Already Good
 - YAML frontmatter complete (name, description, tools)
@@ -37,31 +65,27 @@
 - Removed bottom tagline
 
 ---
-| readme-generator | 263 lines | TBD | TBD |
-| knowledge-graph-agent | 347 lines | TBD | TBD |
-| plan-reviewer | 351 lines | TBD | TBD |
-| brainstormer | 321 lines | TBD | TBD |
-| rug-orchestrator | 658 lines | TBD | TBD |
-| **Total** | **2,272 lines** | **TBD** | **TBD** |
 
----
-
-## plan-executor (90 lines → ~55 lines, ~39% reduction)
+## readme-generator (263 lines → ~75 lines, ~71% reduction)
 
 ### ✅ Already Good
 - YAML frontmatter complete (name, description, tools, handoffs)
-- Clear role/persona sentence
-- Commands section present with flags
-- What to Match table — concise, no prose
-- Three-tier boundaries (Always/Never)
-- Narrowed toolset: `["read", "edit", "search", "execute", "todo"]`
+- Clear role/persona with constraint
+- Two startup behavior steps with bash commands
+- Section Mapping table for Mode 2 — concise and useful
+- Three-tier boundaries (✅/⚠️/🚫)
+- Narrowed toolset: `["read", "edit", "search", "execute"]`
 
 ### ❌ Needs Improvement
-- Python code style comparison block is 15 lines — too many examples (Priority 1: keep ONE real example)
-- Bottom tagline is unnecessary token overhead
+- Mode 1 full README template is 40 lines of markdown boilerplate (Priority 1: remove inline examples)
+- Three "Extracting README Data from KG" YAML→README before/after examples total ~60 lines (Priority 1: remove inline examples)
+- Completion Message is a 15-line code block template (Priority 1: prose→structured)
+- Bottom tagline is unnecessary overhead
 
 ### 💡 Changes Applied
-- Replaced 15-line Python triple-comparison block with a 7-line two-case contrast showing the key insight only
-- Removed bottom tagline (`*When in Rome...`)
+- Replaced 40-line README template with section name list (9 sections)
+- Replaced 3 KG extraction examples with 4-bullet data mapping summary
+- Replaced completion message block with 2 bullets inside Boundaries
+- Removed bottom tagline
 
 ---
