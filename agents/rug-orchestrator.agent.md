@@ -244,6 +244,16 @@ SCOPE:
 - Files to create: [list]
 - Files to NOT touch: [everything else]
 
+DEPENDENCIES (from knowledge-graph.yaml):
+[If dependencies exist for files in scope:]
+For files/functions in this task:
+- function_name in file.py
+  → Calls: [functions this calls]
+  → Called by: [functions that call this]
+
+[If no dependencies:]
+No tracked dependencies for files in this task scope.
+
 REQUIREMENTS:
 - [Requirement 1 from plan]
 - [Requirement 2 from plan]
