@@ -12,7 +12,7 @@
 | plan-executor | 90 lines | 70 lines | ~22% |
 | pytest-agent | 242 lines | 94 lines | ~61% |
 | readme-generator | 263 lines | 92 lines | ~65% |
-| knowledge-graph-agent | 347 lines | TBD | TBD |
+| knowledge-graph-agent | 347 lines | 90 lines | ~74% |
 | plan-reviewer | 351 lines | TBD | TBD |
 | brainstormer | 321 lines | TBD | TBD |
 | rug-orchestrator | 658 lines | TBD | TBD |
@@ -63,6 +63,31 @@
 - Replaced clarification example block with 5-bullet list of what to ask
 - Merged Scope Boundaries into main Boundaries section
 - Removed bottom tagline
+
+---
+
+## knowledge-graph-agent (347 lines → ~80 lines, ~77% reduction)
+
+### ✅ Already Good
+- YAML frontmatter complete (name, description, tools)
+- Clear role bullets (4 lines)
+- Tech stack / file structure bullets — one-liner format (Priority 2: condense tech stack ✅)
+- Startup behavior with clear decision tree
+- Commands grouped by language
+- Three-tier boundaries (✅/⚠️/🚫)
+- Validation checklist
+
+### ❌ Needs Improvement
+- Full YAML output format schema is 50 lines (Priority 1: remove inline examples)
+- Three Analysis Standards code examples total 55 lines (Priority 1: one example max)
+- Four web framework pattern code examples total 35 lines (Priority 1: remove inline examples)
+- Incremental Update Mode has verbose 5-step list (Priority 2: condense)
+
+### 💡 Changes Applied
+- Replaced 50-line YAML schema with single bullet listing all 10 section names
+- Removed all 3 Analysis Standards YAML examples — naming conventions bullet is sufficient
+- Replaced 4 web framework code blocks with single-line pattern description
+- Condensed incremental update steps to 3 bullets inside Scanning Strategy section
 
 ---
 
