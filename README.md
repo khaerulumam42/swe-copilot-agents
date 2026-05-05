@@ -13,8 +13,8 @@ pip install swe-copilot-agents
 Or install from source:
 
 ```bash
-git clone https://github.com/khaerulumam42/agent-generator.git
-cd agent-generator
+git clone https://github.com/khaerulumam42/swe-copilot-agents.git
+cd swe-copilot-agents
 pip install -e .
 ```
 
