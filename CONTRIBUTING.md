@@ -8,8 +8,8 @@ Thank you for your interest in contributing! This project is maintained by [@kha
 
 ```bash
 # Fork via GitHub UI, then clone your fork
-git clone https://github.com/<your-username>/agent-generator.git
-cd agent-generator
+git clone https://github.com/<your-username>/swe-copilot-agents.git
+cd swe-copilot-agents
 pip install -e .
 ```
 
@@ -80,7 +80,7 @@ If you found a gap, a missing command, or a boundary violation while using an ag
 
 ### Bug Reports
 
-Open a [GitHub Issue](https://github.com/khaerulumam42/agent-generator/issues) with:
+Open a [GitHub Issue](https://github.com/khaerulumam42/swe-copilot-agents/issues) with:
 
 - Which agent you were using
 - What you asked it to do
