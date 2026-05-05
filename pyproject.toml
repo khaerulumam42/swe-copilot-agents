@@ -1,7 +1,7 @@
 [project]
 name = "swe-copilot-agents"
 version = "0.1.10"
-description = "GitHub Copilot custom agents for orchestrating the complete software development lifecycle"
+description = "GitHub Copilot agents for AI-assisted software development"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
@@ -36,9 +36,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/khaerulumam42/agent-generator"
-Repository = "https://github.com/khaerulumam42/agent-generator"
-Issues = "https://github.com/khaerulumam42/agent-generator/issues"
+Homepage = "https://github.com/khaerulumam42/swe-copilot-agents"
+Repository = "https://github.com/khaerulumam42/swe-copilot-agents"
+Issues = "https://github.com/khaerulumam42/swe-copilot-agents/issues"
 
 [build-system]
 requires = ["hatchling"]
