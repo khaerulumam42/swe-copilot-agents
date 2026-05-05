@@ -78,14 +78,6 @@ User Request
 
 Each task is validated before moving on. Failed tasks are retried up to 3 times, then escalated to the human.
 
-## Install from source
-
-```bash
-git clone https://github.com/khaerulumam42/swe-copilot-agents.git
-cd swe-copilot-agents
-pip install -e .
-```
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
