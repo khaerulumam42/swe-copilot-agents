@@ -82,7 +82,7 @@ copilot-agent-sources/  # Source materials (blog posts, docs)
 agents/                  # Generated .agent.md files
   └── [agent-name].agent.md   # Individual agent definitions
 
-skills/                  # Additional tools (includes pdf-slides skill)
+skills/                  # Additional tools
 ```
 
 ## Creating a New Agent
@@ -182,15 +182,6 @@ python3 -m twine upload dist/swe_copilot_agents-*.whl
 - **@security-agent** - Analyzes code for security issues
 - **@deploy-agent** - Handles builds and deployments
 - **@planner-agent** - Creates implementation plans (read/search/edit only)
-
-## Skills: PDF Slides Generator
-
-The `skills/pdf-slides/` folder contains a separate skill for generating PDF slide decks from JSON outlines. This is independent of the agent generation workflow.
-
-```bash
-# Generate PDF from JSON outline
-python skills/pdf-slides/skill.py outline.json -o output.pdf
-```
 
 ## Additional Resources
 
