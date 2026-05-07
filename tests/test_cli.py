@@ -5,6 +5,8 @@ Covers macOS, Linux, and Windows by using pathlib throughout,
 tmp_path/monkeypatch.chdir for filesystem isolation, and
 mocking _get_agents_dir() so tests don't require an installed wheel.
 """
+from __future__ import annotations
+
 import inspect
 import re
 import sys
