@@ -9,16 +9,14 @@ import sys
 
 def _show_install_prompt():
     """Show a prompt to install agents after pip install."""
-    # Check if agents are already installed
     from pathlib import Path
 
     cwd = Path.cwd()
     github_agents = cwd / ".github" / "agents"
 
     if github_agents.exists() and any(github_agents.glob("*.agent.md")):
-        return  # Already installed, don't prompt
+        return
 
-    # Show the prompt
     print()
     print("=" * 60)
     print("  swe-copilot-agents installed successfully!")
@@ -26,16 +24,15 @@ def _show_install_prompt():
     print()
     print("To install the GitHub Copilot agents to your project, run:")
     print()
-    print("    awesome-copilot")
+    print("    swe-copilot-agents")
     print()
     print("This will copy all agent files to .github/agents/")
     print()
     print("=" * 60)
     print()
 
-    # Optionally offer to run it now
     try:
-        response = input("Run 'awesome-copilot' now? [Y/n]: ").strip().lower()
+        response = input("Run 'swe-copilot-agents' now? [Y/n]: ").strip().lower()
         if response in ("", "y", "yes"):
             subprocess.run([sys.executable, "-m", "awesome_copilot.cli"], check=True)
     except (KeyboardInterrupt, EOFError):
@@ -43,5 +40,4 @@ def _show_install_prompt():
 
 
 _show_install_prompt()
-# Clean up the function from namespace
 del _show_install_prompt

@@ -8,10 +8,12 @@ on:
 
 jobs:
   test:
-    name: Test package
-    runs-on: ubuntu-latest
+    name: Test (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
@@ -23,26 +25,60 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install build dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build twine
+          pip install build twine pytest pytest-cov
 
       - name: Build package
         run: python -m build
 
-      - name: Check package
-        run: twine check --strict dist/*
+      - name: Check package metadata
+        run: python -m twine check --strict dist/*
 
-      - name: Install package
+      - name: Install package (Unix)
+        if: runner.os != 'Windows'
         run: pip install dist/*.whl
 
-      - name: Test CLI install to current directory
+      - name: Install package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
         run: |
-          cd /tmp
+          $whl = Get-ChildItem dist\*.whl | Select-Object -First 1 -ExpandProperty FullName
+          pip install $whl
+
+      - name: Run pytest
+        run: pytest tests/ -v --tb=short
+
+      - name: Test CLI end-to-end (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          tmp=$(mktemp -d)
+          cd "$tmp"
           swe-copilot-agents
           ls -la .github/agents/
-          [ -f .github/agents/dev-orchestrator.agent.md ] || exit 1
+          python -c "
+          import sys
+          from pathlib import Path
+          agents = list(Path('.github/agents').glob('*.agent.md'))
+          print(f'Found {len(agents)} agent(s)')
+          assert agents, 'No agents installed'
+          "
+
+      - name: Test CLI end-to-end (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $tmp = New-TemporaryFile | ForEach-Object { Remove-Item $_; New-Item -ItemType Directory -Path "$($_.FullName)" }
+          Set-Location $tmp
+          swe-copilot-agents
+          Get-ChildItem .github\agents\
+          python -c @"
+          from pathlib import Path
+          agents = list(Path('.github/agents').glob('*.agent.md'))
+          print(f'Found {len(agents)} agent(s)')
+          assert agents, 'No agents installed'
+          "@
 
   validate-agents:
     name: Validate agent files
@@ -52,39 +88,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check agent files
-        run: |
-          for agent in agents/*.agent.md; do
-            if [ -f "$agent" ]; then
-              echo "Checking $agent..."
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-              # Check for YAML frontmatter
-              if ! grep -q "^---" "$agent"; then
-                echo "❌ Missing YAML frontmatter in $agent"
-                exit 1
-              fi
+      - name: Install pytest
+        run: pip install pytest
 
-              # Check for name in frontmatter
-              if ! grep -q "^name:" "$agent"; then
-                echo "❌ Missing 'name' in frontmatter of $agent"
-                exit 1
-              fi
+      - name: Run agent validation tests
+        run: pytest tests/test_agents.py -v --tb=short
 
-              # Check for description in frontmatter
-              if ! grep -q "^description:" "$agent"; then
-                echo "❌ Missing 'description' in frontmatter of $agent"
-                exit 1
-              fi
-
-              echo "✅ $agent is valid"
-            fi
-          done
-
-      - name: Count agents
+      - name: Count agents (informational)
         run: |
           count=$(ls -1 agents/*.agent.md 2>/dev/null | wc -l)
-          echo "Found $count agent files"
-          if [ "$count" -eq 0 ]; then
-            echo "❌ No agent files found"
-            exit 1
-          fi
+          echo "Found $count agent file(s)"
