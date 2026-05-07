@@ -78,6 +78,26 @@ User Request
 
 Each task is validated before moving on. Failed tasks are retried up to 3 times, then escalated to the human.
 
+## Testing
+
+The package has a cross-platform test suite covering macOS, Linux, and Windows.
+
+```bash
+pip install -e ".[dev]"
+pytest tests/ -v
+```
+
+CI runs automatically on every push across **3 OSes × 5 Python versions** (3.9 – 3.13):
+
+| | Ubuntu | macOS | Windows |
+|---|---|---|---|
+| Python 3.9 – 3.13 | ✓ | ✓ | ✓ |
+
+Tests cover:
+- `install()` — directory creation, file copying, idempotency, error handling
+- Agent file validity — Windows-safe filenames, UTF-8 encoding, required YAML frontmatter
+- Cross-platform path safety — pathlib usage, no hardcoded separators
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
