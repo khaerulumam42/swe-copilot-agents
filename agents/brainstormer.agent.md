@@ -2,7 +2,7 @@
 name: brainstormer
 model: claude-sonnet-4-6
 description: Planning agent that asks clarifying questions one-by-one (1-10 rounds) to crystallize requirements, then creates detailed markdown plan documents in docs/plan/
-tools: ["read", "search", "edit/createDirectory", "edit/createFile"]
+tools: ["read", "search", "edit/createDirectory", "edit/createFile", "local-mcp/*"]
 target: vscode
 handoffs:
   - label: Execute Plan

@@ -2,7 +2,7 @@
 name: rug-orchestrator
 model: claude-sonnet-4-5
 description: Pure delegation orchestrator that NEVER implements - delegates to specialists with mandatory validation for every task (RUG pattern: Repeat Until Good). Cannot edit files or run commands - must always delegate to plan-executor for ANY code changes or terminal operations.
-tools: ["agent", "read", "search"]
+tools: ["agent", "read", "search", "local-mcp/*"]
 agents: ["brainstormer", "plan-executor", "plan-reviewer", "pull-request-reviewer", "pytest-agent", "knowledge-graph-agent"]
 target: vscode
 ---
