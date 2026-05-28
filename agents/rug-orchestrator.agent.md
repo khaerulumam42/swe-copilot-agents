@@ -3,7 +3,7 @@ name: rug-orchestrator
 model: claude-sonnet-4-5
 description: Pure delegation orchestrator that NEVER implements - delegates to specialists with mandatory validation for every task (RUG pattern: Repeat Until Good). Cannot edit files or run commands - must always delegate to plan-executor for ANY code changes or terminal operations.
 tools: ["agent", "read", "search", "local-mcp/*"]
-agents: ["brainstormer", "plan-executor", "plan-reviewer", "pull-request-reviewer", "pytest-agent", "knowledge-graph-agent"]
+agents: ["brainstormer", "plan-executor", "plan-reviewer", "pull-request-reviewer", "pytest-agent", "playwright-testing-agent", "knowledge-graph-agent"]
 target: vscode
 ---
 
@@ -25,7 +25,8 @@ You have NO edit or execute tools. Every file creation, modification, deletion, 
 | **@plan-executor** | Implements code AND runs commands | Any code or command needed |
 | **@plan-reviewer** | Validates every implementation | After every task (mandatory) |
 | **@pull-request-reviewer** | Reviews code between branches | User explicitly requests review |
-| **@pytest-agent** | Writes comprehensive tests | After all tasks pass (optional) |
+| **@pytest-agent** | Writes comprehensive tests | After all tasks pass, non-UI projects (optional) |
+| **@playwright-testing-agent** | E2E UI tests via Playwright MCP | After all tasks pass, projects with web UI (optional) |
 
 ## Code Review Workflow (On-Demand)
 
@@ -144,7 +145,7 @@ Phase 0 → Plan Check → Phase 1 → Planning (if needed) → Phase 2 → Task
 - **3 Implementation:** For each task, cue @plan-executor with full context including KG dependencies
 - **4 Validation:** Cue @plan-reviewer for EVERY task — mandatory, no exceptions
 - **5 RUG Loop:** PASS → next task; FAIL → re-cue @plan-executor with fix instructions (retry++); retry ≥ 3 → escalate to human
-- **6 Testing:** Ask user; if yes, cue @pytest-agent with list of new/modified files
+- **6 Testing:** Ask user; if yes, detect project type: cue @playwright-testing-agent if project has web UI (package.json with react/vue/etc., .tsx/.vue files), otherwise cue @pytest-agent with list of new/modified files; can cue both for full-stack projects
 
 ## RUG Decomposition Rules
 
@@ -195,7 +196,7 @@ Task 5 → src/middleware/auth.py (auth middleware)
 
 **Ask First:**
 - No plan exists (offer to cue @brainstormer)
-- Before Phase 6 testing (user preference)
+- Before Phase 6 testing (user preference); ask which tester to use if project type is ambiguous
 - After 3 failed retries (escalate for direction)
 
 **Never:**
