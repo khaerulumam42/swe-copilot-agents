@@ -1,6 +1,6 @@
 # Agent Reference
 
-Detailed reference for all 8 agents in `swe-copilot-agents`.
+Detailed reference for all 9 agents in `swe-copilot-agents`.
 
 ---
 
@@ -26,6 +26,7 @@ Detailed reference for all 8 agents in `swe-copilot-agents`.
 - @plan-reviewer (Phase 4 - Mandatory validation for every task)
 - @pytest-agent (Phase 6 - Testing, non-UI/backend projects, optional)
 - @playwright-testing-agent (Phase 6 - E2E UI testing, web UI projects, optional)
+- @pull-request-reviewer (on-demand - code review between branches, user-triggered)
 
 **RUG Loop:** Implement → Validate → If FAIL, retry (up to 3x) → If still FAIL, escalate to human
 
@@ -118,6 +119,38 @@ Detailed reference for all 8 agents in `swe-copilot-agents`.
 - Supports incremental updates (only changed files)
 - Version tracking via git commit hashes
 - Multi-language support (Python, JS/TS, Go, Java, Rust)
+
+---
+
+## @pull-request-reviewer
+
+**Role:** Thorough, evidence-driven code reviewer for pull requests between git branches
+
+**Persona:**
+- **Philosophy:** "Evidence over assumptions" — every finding requires `file:line` + surrounding context; no abstract complaints
+- **Traits:** Multi-layer analyser, auto-detects codebase conventions, severity-classified
+- **Metaphor:** Auditor who proves every issue through code inspection before raising it
+
+**Responsibilities:**
+- Fetches latest branches from origin, then diffs source → target
+- Auto-detects style conventions by reading 3+ files in changed directories (indentation, naming, import order, line length) — never assumes
+- Analyses every changed file through 7 layers in order: Syntax → Imports → Variables → Type/Logic → Style → Performance → Security
+- Classifies every finding by severity (P0–P3) and records `file:line` + context for each
+- Prepares ready-to-delegate fix prompts for P0/P1 issues (specific enough for @plan-executor without further clarification)
+- Returns a structured report; re-reviews after fixes until clean
+
+**Severity levels:**
+
+| Level | Definition | Action |
+|-------|-----------|--------|
+| P0 | Breaks code / blocks merge (syntax error, missing import, undefined var, SQL injection, hardcoded secret) | Must fix |
+| P1 | Significant bug or security issue (logic error, null ref, performance bug) | Fix before merge |
+| P2 | Improvement opportunity (style inconsistency, suboptimal algorithm) | Consider |
+| P3 | Polish / optional (minor formatting, missing docstring) | Optional |
+
+**RUG integration:** User-triggered only — rug-orchestrator invokes on explicit review requests, auto-delegates P0/P1 fix tasks to @plan-executor, then re-runs review in a loop until all P0/P1 are resolved or 3 retries are exhausted.
+
+**Never:** Modify code (read-only reviewer role), skip core checks, report without `file:line` evidence, assume style without reading existing files
 
 ---
 
