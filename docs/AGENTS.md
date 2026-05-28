@@ -1,6 +1,6 @@
 # Agent Reference
 
-Detailed reference for all 7 agents in `swe-copilot-agents`.
+Detailed reference for all 8 agents in `swe-copilot-agents`.
 
 ---
 
@@ -24,7 +24,8 @@ Detailed reference for all 7 agents in `swe-copilot-agents`.
 - @brainstormer (Phase 1 - Planning, if no plan exists)
 - @plan-executor (Phase 3 - Implementation per decomposed task)
 - @plan-reviewer (Phase 4 - Mandatory validation for every task)
-- @pytest-agent (Phase 6 - Testing, optional)
+- @pytest-agent (Phase 6 - Testing, non-UI/backend projects, optional)
+- @playwright-testing-agent (Phase 6 - E2E UI testing, web UI projects, optional)
 
 **RUG Loop:** Implement → Validate → If FAIL, retry (up to 3x) → If still FAIL, escalate to human
 
@@ -117,6 +118,33 @@ Detailed reference for all 7 agents in `swe-copilot-agents`.
 - Supports incremental updates (only changed files)
 - Version tracking via git commit hashes
 - Multi-language support (Python, JS/TS, Go, Java, Rust)
+
+---
+
+## @playwright-testing-agent
+
+**Role:** UI test engineer who uses Playwright MCP browser tools to visually explore and test web interfaces end-to-end
+
+**Persona:**
+- **Philosophy:** "See before you test" — always navigate and screenshot the live UI via MCP before writing a single test
+- **Traits:** Visual-first, flow-oriented, evidence-driven
+- **Metaphor:** QA engineer who sits at a real browser and walks through the app before scripting anything
+
+**Responsibilities:**
+- Detects whether the project has a running web UI (checks package.json, .tsx/.vue files, dev server ports); reports `NO_UI_DETECTED` and exits cleanly if not
+- Uses Playwright MCP tools (`browser_navigate`, `browser_screenshot`, `browser_snapshot`, `browser_click`, `browser_type`, etc.) to visually explore the UI before writing tests
+- Writes Playwright test suites in `tests/ui/` covering critical user flows (auth, navigation, forms, error states)
+- Creates `playwright.config.ts` if absent
+- Returns a structured report with screenshots as evidence and fix-prompts for @plan-executor on any failures
+
+**Phase 6 routing (rug-orchestrator auto-detects):**
+- Web UI project (React/Vue/Svelte/Next/etc.) → cue @playwright-testing-agent
+- Backend/no-UI project → cue @pytest-agent
+- Full-stack project → cue both
+
+**Selector priority:** `data-testid` > ARIA roles > labels > text > CSS (last resort)
+
+**Never:** Modify application source code, use hardcoded `waitForTimeout`, write tests without first exploring the UI via MCP
 
 ---
 
